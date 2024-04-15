@@ -43,7 +43,7 @@ public/
 │   ├── signup.js
 │   └── (put any other clientside js you need here)
 └── css/
-    └── (css for all pages go here)
+    └── (css for all pages go here, 1 file for each page)
 views/
 ├── layouts/
 │   ├── main.handlebars
@@ -67,6 +67,20 @@ seed.js
 package.js
 ```
 
+## Schema
+when db functions are created, put the schema used here. If you need to update the schema or db functions, edit the corresponding schema below.
+### Users
+```
+{}
+```
+### Restaurants
+```
+{}
+```
+### Reviews
+```
+{}
+```
 
 ## Necessary Features
 - [x] create to do list (andrew)
@@ -97,7 +111,7 @@ package.js
   - use the db functions to add them all to the db 
 - [ ] home page, filter and sort all reviews
   - route should be /home
-  - should contain a list of links/thumbnails to individual reviews, each linking to /review/:reviewId
+  - should contain a list of links/thumbnails to individual reviews, each linking to /view/review/:reviewId
   - should contain a link to the signup/login page: /auth/login
   - should contain a link to the create review process: /create/restaurant
     - if user is not logged in, page should link to /auth/login instead
@@ -130,18 +144,18 @@ package.js
   - user should be able to click on an existing restaraunt or create new restaraunt
     - if the user clicked on a create new restaraunt:
       - page should allow user to add a restaurant to db based on the schema (data validation should happen in the client, server, and db)
-        - form should send response to create/restaurant/new/ with form data in the body, and the router should validate & call the db function to create new restaurant 
+        - form should send response to /create/restaurant/new with form data in the body, and the router should validate & call the db function to create new restaurant 
       - after user creates restaurant page should direct them to /create/dish, with the request body containing restarauntId of the restaurant
-    - if user clicked existing restaurant page should direct them to /create/dish, with the request body containing restarauntId 
+    - if user clicked existing restaurant, page should direct them to /create/dish, with the request body containing restarauntId 
 - [ ] way to add dish
   - route should be /create/dish
   - user should be able to search for existing dish, and the front end will show any dishes with similar names and an option to create a new one
   - user should be able to click on an existing dish or create new dish
     - if the user clicked on an existing dish:
       - page should allow user to add a restaurant to db based on the schema (data validation should happen in the client, server, and db)
-        - form should send response to /create/dish/new/ with form data in the body, and the router should validate & call the db function to create new dish 
+        - form should send response to /create/dish/new with form data in the body, and the router should validate & call the db function to create new dish 
       - after user creates dish page should direct them to /create/review, with the request body containing dishId of the new dish and restaurantId 
-    - if user clicked existing restaurant page should direct them to /create/review, with the request body containing dishId and restaurantId 
+    - if user clicked existing restaurant, page should direct them to /create/review, with the request body containing dishId and restaurantId 
 - [ ] way to add review
   - route should be /create/review
   - should contain a form with fields corresponding to the review schema
