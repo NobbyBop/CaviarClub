@@ -1,0 +1,17 @@
+{
+	"name": "caviarclub",
+	"version": "1.0.0",
+	"description": "cs 546 final project",
+	"main": "app.js",
+	"type": "module",
+	"scripts": {
+		"start": "node app.js"
+	},
+	"author": "Andrew Yurovchak, Nick Mirigliani, Nick Messina, Matt Mamanno, Thomas Cheng",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.19.2",
+		"express-handlebars": "^7.1.2",
+		"mongodb": "^6.5.0"
+	}
+}
