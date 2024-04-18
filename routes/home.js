@@ -3,6 +3,7 @@ import { reviewData } from "../data/index.js";
 const router = Router();
 
 router.route("/").get(async (req, res) => {
+    let allReviews = []
     try{
         let allReviews = await reviewData.getAllReviews(0, 20)
         return res.render("home",{title:"CaviarClub", reviews:allReviews})
