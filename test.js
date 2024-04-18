@@ -4,6 +4,7 @@ import { createRestaurant } from "./data/restaurant/createRestaurant.js";
 import { createReview } from "./data/review/createReview.js";
 import { createUser } from "./data/user/createUser.js";
 import { dbConnection, closeConnection } from "./config/mongoConnection.js";
+import { reviewData } from "./data/index.js";
 import { restaurants } from "./config/mongoCollections.js";
 
 let connect = await dbConnection();
@@ -43,6 +44,11 @@ let pisghettyReview2 = await createReview(
   ["Spicy", "Saucy"],
   "THis rpightrertry was just ok"
 );
+
+// let reviewList = await reviewData.getReviewsFromRestaurant(bennyId)
+// console.log(reviewList)
+
+
 // //create a user and a review first
 // let wowwee = await createComment(
 //   "WoWWWW!!!!!!!!!!!!",
