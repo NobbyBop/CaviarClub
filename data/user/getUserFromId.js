@@ -1,1 +1,1 @@
-export function getUserFromId() {}
+export async function getUserFromId(id) {}
