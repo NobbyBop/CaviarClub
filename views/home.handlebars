@@ -1,0 +1,14 @@
+<link rel="stylesheet" href=".././public/css/home.css">
+<article>
+    <h1 id="title">Home</h1>
+    <ul id="reviewList">
+    {{#each review}}
+        <li class="review">
+            <section>
+                <a href="/view/review/{{review._id}}">{{review.title}}</a>
+            </section>
+        </li>
+    {{/each}}
+    </ul>
+
+</article>
