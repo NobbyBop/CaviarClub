@@ -45,8 +45,8 @@ let pisghettyReview2 = await createReview(
   "THis rpightrertry was just ok"
 );
 
-// let reviewList = await reviewData.getReviewsFromRestaurant(bennyId)
-// console.log(reviewList)
+let reviewList = await reviewData.getReviewsFromRestaurant(String(bennyId))
+console.log(reviewList)
 
 
 // //create a user and a review first
