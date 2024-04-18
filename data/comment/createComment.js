@@ -11,7 +11,7 @@ export const createComment = async (comment, userId, reviewId) => {
   //over and out
 
   const newComment = {
-    userId: userId,
+    userId: new ObjectId(userId),
     comment: comment,
   };
 
