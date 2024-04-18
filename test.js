@@ -48,6 +48,8 @@ let pisghettyReview2 = await createReview(
 let reviewList = await reviewData.getReviewsFromRestaurant(String(bennyId))
 console.log(reviewList)
 
+let reviewList2 = await reviewData.getReviewsFromUser(String(me._id))
+console.log(reviewList2)
 
 // //create a user and a review first
 // let wowwee = await createComment(
