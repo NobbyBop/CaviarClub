@@ -1,11 +1,17 @@
-import * as h from "../../helpers.js"
-import { users } from "../../config/mongoCollections"
+import { users } from "../../config/mongoCollections.js";
+import { checkId } from "../../helpers.js";
 import { ObjectId } from "mongodb";
 
-export async function getUserFromId(id) {
-    id = h.vId(id)
-    let col = await users()
-    let user = await col.findOne({_id:new ObjectId()})
-    if(!user) throw new Error("Could not find user with that id!")
-    return user
-}
+export const getUserFromId = async (userId) => {
+  //typecheck
+  userId = checkId(userId);
+  //over
+
+  const userCollection = await users();
+  const user = await userCollection.findOne({
+    _id: new ObjectId(userId),
+  });
+  if (user === null) throw new Error("No user with that ID");
+
+  return user;
+};
