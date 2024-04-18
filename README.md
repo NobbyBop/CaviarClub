@@ -77,6 +77,8 @@ when db functions are created, put the schema used here. If you need to update t
     - user should enter a username+password
     - if username does not exist in db, page should send form contents to /create/user/new where the create user db function should be called
     - page should then log in as the newly created user, and return to home page
+  - you should also create a logout route: /auth/logout
+    - i forgot to make separate files for this, you will have to
 - [ ] way to add/select restaurant
   - route should be /create/restaurant
   - you will need to write a `searchRestaurantFromName` db function

@@ -82,3 +82,11 @@ function checkDomain(domain) {
     //THIS IS HOW WE CHECKED WEBSITES IN LAB 6 SO IT IS HOW I AM CHECKING HERE.
     throw new Error("Not a valid website");
 }
+
+export const vInt = (num) => {
+  if (num === undefined || typeof num !== "number" || Number.isNaN(num)) {
+    throw new Error("Not a number!");
+  }
+  if (num !== num.toFixed(0)) throw new Error("Not an integer!");
+  return num;
+};
