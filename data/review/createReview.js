@@ -38,9 +38,9 @@ export const createReview = async (
 
   //new review
   const newReview = {
-    dishId: dishId,
-    userId: userId,
-    restaurantId: restaurantId,
+    dishId: new ObjectId(dishId),
+    userId: new ObjectId(userId),
+    restaurantId: new ObjectId(restaurantId),
     picture: picture,
     rating: rating,
     date: dateString,
