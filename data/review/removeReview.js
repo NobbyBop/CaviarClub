@@ -1,1 +1,3 @@
-export function removeReview() {}
+export function removeReview(id) {
+    
+}

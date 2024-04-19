@@ -10,7 +10,7 @@ export const getRestaurantFromId = async (restaurantId) => {
   const restaurant = await restaurantCollection.findOne({
     _id: new ObjectId(restaurantId),
   });
-  if (restaurant === null) throw new Error("No product with that ID");
+  if (restaurant === null) throw new Error("No restaurant with that ID");
 
   return restaurant;
 };
