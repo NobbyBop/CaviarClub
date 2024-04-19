@@ -5,9 +5,9 @@
     {{#each reviews}}
         <li class="review">
             <section>
-                <a href="/view/review/{{this._id}}">{{this.content}}</a>
-                <a href="/view/dish/{{this.dishId}}">{{this.dishname}}</a>
-                <a href="/view/user/{{this.userId}}">{{this.username}}</a>
+                <a href="/view/review/{{this._id}}">[PICTURE HERE]{{this.title}}</a><br>
+                A review of: <a href="/view/dish/{{this.dishId}}">{{this.dishname}}</a><br>
+                By: <a href="/view/user/{{this.userId}}">{{this.username}}</a><br>
             </section>
         </li>
     {{/each}}
