@@ -16,7 +16,7 @@ export async function getAllReviews(skipNum, limitNum) {
         allReviews = await col.find({}).skip(skipNum).limit(limitNum).toArray()
     }
     catch(e){
-        allReviews = col.find({}).toArray()
+        allReviews = await col.find({}).toArray()
     }
     if(!allReviews) throw new Error("Could not get all reviews!")
 
