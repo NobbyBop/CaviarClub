@@ -3,16 +3,14 @@ import { checkId } from "../../helpers.js";
 import { ObjectId } from "mongodb";
 
 export const getReviewsFromDishId = async (dishId) => {
-  //type mometn
-  dishId = checkId(dishId);
-  //donezo
+	dishId = checkId(dishId);
 
-  const reviewCollection = await reviews();
-  const reviewsByDish = await reviewCollection.find({
-    dishId: new ObjectId(dishId),
-  });
-  if (reviewsByDish) return reviewsByDish.toArray();
-  else return [];
-  //console.log("revieewewwe", reviewsByDish);
-  //array of reviews^
+	const reviewCollection = await reviews();
+	const reviewsByDish = await reviewCollection.find({
+		dishId: new ObjectId(dishId),
+	});
+
+	if (!reviewsByDish) throw new Error("No dish with that id.");
+
+	return reviewsByDish.toArray();
 };

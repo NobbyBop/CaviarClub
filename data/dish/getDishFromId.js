@@ -3,16 +3,16 @@ import { checkId } from "../../helpers.js";
 import { ObjectId } from "mongodb";
 
 export const getDishFromId = async (dishId) => {
-  //get restaurant by id then yeah use that restaurant
-  dishId = checkId(dishId);
-  //get the restaurant
-  let restaurantCollection = await restaurants();
+	dishId = checkId(dishId);
 
-  //dish must belong to the restaurant
-  const foundDish = await restaurantCollection.findOne(
-    { "dishes._id": new ObjectId(dishId) },
-    { projection: { _id: 0, "dishes.$": 1 } }
-  );
-  if (!foundDish) throw new Error("Dish Not found");
-  return foundDish["dishes"][0];
+	let restaurantCollection = await restaurants();
+
+	const foundDish = await restaurantCollection.findOne(
+		{ "dishes._id": new ObjectId(dishId) },
+		{ projection: { _id: 0, "dishes.$": 1 } }
+	);
+
+	if (!foundDish) throw new Error("Dish Not found");
+
+	return foundDish.dishes.filter((dish) => dish._id == dishId)[0];
 };
