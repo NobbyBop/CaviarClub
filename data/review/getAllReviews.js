@@ -19,25 +19,6 @@ export async function getAllReviews(skipNum, limitNum) {
         allReviews = await col.find({}).toArray()
     }
     if(!allReviews) throw new Error("Could not get all reviews!")
-
-    /*
-    Most displaying of reviews requires username and dish name, so I
-    include them in the object here before returning. 
-    */
-    for(let review of allReviews){
-        try{
-            let user = await userData.getUserFromId(String(review.userId))
-            review.username = user.username
-        } catch(e) {
-            throw new Error("Invalid user data in review!")
-        }
-        try{
-            let dish = await userData.getDishFromId(String(review.dishId))
-            review.dishname = dish.name
-        } catch(e) {
-            throw new Error("Invalid dish data in review!")
-        }
-    }
     return allReviews
 }
 
