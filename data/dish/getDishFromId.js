@@ -2,7 +2,7 @@ import { restaurants } from "../../config/mongoCollections.js";
 import { checkId } from "../../helpers.js";
 import { ObjectId } from "mongodb";
 
-export const getDishById = async (dishId) => {
+export const getDishFromId = async (dishId) => {
   //get restaurant by id then yeah use that restaurant
   dishId = checkId(dishId);
   //get the restaurant

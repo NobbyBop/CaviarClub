@@ -4,11 +4,13 @@ export const commentData = { createComment, removeComment };
 
 import { createDish } from "./dish/createDish.js";
 import { getDishesFromRestaurantId } from "./dish/getDishesFromRestaurantId.js";
+import { getDishFromId } from "./dish/getDishFromId.js";
 import { removeDish } from "./dish/removeDish.js";
 import { searchDishesFromName } from "./dish/searchDishesFromName.js";
 export const dishData = {
 	createDish,
 	getDishesFromRestaurantId,
+	getDishFromId,
 	removeDish,
 	searchDishesFromName,
 };
