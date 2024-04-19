@@ -1,28 +1,24 @@
 import { reviews } from "../../config/mongoCollections.js";
 import { checkId, checkString } from "../../helpers.js";
 import { ObjectId } from "mongodb";
-import { getReviewFromId } from "../review/getReviewFromId.js";
 
 export const createComment = async (comment, userId, reviewId) => {
-  //typecheck
-  comment = checkString(comment);
-  userId = checkId(userId);
-  reviewId = checkId(reviewId);
-  //over and out
+	comment = checkString(comment);
+	userId = checkId(userId);
+	reviewId = checkId(reviewId);
 
-  const newComment = {
-    userId: new ObjectId(userId),
-    comment: comment,
-  };
+	const newComment = {
+		userId: new ObjectId(userId),
+		comment: comment,
+	};
 
-  const reviewCollection = await reviews();
-  await reviewCollection.findOneAndUpdate(
-    { _id: new ObjectId(reviewId) },
-    { $push: { comments: newComment } }
-  );
+	const reviewCollection = await reviews();
+	const returnValue = await reviewCollection.findOneAndUpdate(
+		{ _id: new ObjectId(reviewId) },
+		{ $push: { comments: newComment } }
+	);
 
-  const review = await getReviewFromId(reviewId);
-  const reviewComments = review["comments"];
-  let returnComment = reviewComments.find((cmt) => cmt["comment"] === comment);
-  return returnComment;
+	if (!returnValue) throw new Error("Error: Comment could not be added");
+
+	return newComment;
 };

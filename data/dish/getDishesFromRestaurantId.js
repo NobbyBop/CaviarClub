@@ -2,10 +2,9 @@ import { checkId } from "../../helpers.js";
 import { getRestaurantFromId } from "../restaurant/getRestaurantFromId.js";
 
 export async function getDishesFromRestaurantId(restaurantId) {
-  //type check
-  restaurantId = checkId(restaurantId);
-  //typecheck over
+	restaurantId = checkId(restaurantId);
 
-  const restaurant = await getRestaurantFromId(restaurantId);
-  return restaurant["dishes"]; //returns array of dishes
+	const restaurant = await getRestaurantFromId(restaurantId);
+
+	return restaurant.dishes;
 }
