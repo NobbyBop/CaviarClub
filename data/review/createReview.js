@@ -6,7 +6,7 @@ import {
   createDateString,
 } from "../../helpers.js";
 import { reviews, restaurants } from "../../config/mongoCollections.js";
-import { getDishById } from "../dish/getDishFromId.js";
+import { getDishFromId } from "../dish/getDishFromId.js";
 import { ObjectId } from "mongodb";
 import { getReviewFromId } from "./getReviewFromId.js";
 import { getReviewsFromDishId } from "./getReviewsFromDishId.js";

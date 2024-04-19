@@ -2,7 +2,7 @@ import { checkId, checkString } from "../../helpers.js";
 import { restaurants } from "../../config/mongoCollections.js";
 import { getDishesFromRestaurantId } from "./getDishesFromRestaurantId.js";
 import { ObjectId } from "mongodb";
-import { getDishById } from "./getDishFromId.js";
+import { getDishFromId } from "./getDishFromId.js";
 
 export const createDish = async (name, restaurantId) => {
   //error checking
