@@ -38,6 +38,7 @@ export const createReview = async (
 		rating: rating,
 		date: dateString,
 		tags: tags,
+		title: title,
 		content: content,
 		comments: [],
 	};
