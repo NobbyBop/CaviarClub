@@ -5,6 +5,8 @@ import { createReview } from "./data/review/createReview.js";
 import { createUser } from "./data/user/createUser.js";
 import { dbConnection, closeConnection } from "./config/mongoConnection.js";
 import { reviewData, userData, dishData, restaurantData } from "./data/index.js";
+import * as h from "./helpers.js"
+
 import { restaurants } from "./config/mongoCollections.js";
 
 let connect = await dbConnection();
@@ -59,6 +61,8 @@ console.log(dishes)
 
 let srest = await restaurantData.searchRestaurantsFromName("bennn")
 console.log(srest)
+
+console.log(h.vInt(32))
 
 // //create a user and a review first
 // let wowwee = await createComment(
