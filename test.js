@@ -10,59 +10,59 @@ import * as h from "./helpers.js"
 import { restaurants } from "./config/mongoCollections.js";
 
 let connect = await dbConnection();
-await connect.dropDatabase();
+// await connect.dropDatabase();
 
-let bennys = await createRestaurant(
-  "Benny Tudino's",
-  "355 Washington St. Hoboken, NJ"
-);
-let bennyId = bennys._id;
-console.log("benny", bennys);
+// let bennys = await createRestaurant(
+//   "Benny Tudino's",
+//   "355 Washington St. Hoboken, NJ"
+// );
+// let bennyId = bennys._id;
+// console.log("benny", bennys);
 
-let pisghetty = await createDish("Spaghetti", bennyId.toString());
-console.log("pisghet", pisghetty);
+// let pisghetty = await createDish("Spaghetti", bennyId.toString());
+// console.log("pisghet", pisghetty);
 
-let me = await createUser("poopyhead@gmail.com", "Mess1", "Cowabunga", true);
-console.log(me);
+// let me = await createUser("poopyhead@gmail.com", "Mess1", "Cowabunga", true);
+// console.log(me);
 
-let pisghettyReview = await createReview(
-  pisghetty._id.toString(),
-  me._id.toString(),
-  bennyId.toString(),
-  "picture.png",
-  "Great psigheturtryt!",
-  5,
-  ["Spicy", "Saucy"],
-  "THis rpightrertry was FANTABULOUS!"
-);
-console.log("review", pisghettyReview);
-let pisghettyReview2 = await createReview(
-  pisghetty._id.toString(),
-  me._id.toString(),
-  bennyId.toString(),
-  "picture2.png",
-  "meh [psie]",
-  3,
-  ["Spicy", "Saucy"],
-  "THis rpightrertry was just ok"
-);
+// let pisghettyReview = await createReview(
+//   pisghetty._id.toString(),
+//   me._id.toString(),
+//   bennyId.toString(),
+//   "picture.png",
+//   "Great psigheturtryt!",
+//   5,
+//   ["Spicy", "Saucy"],
+//   "THis rpightrertry was FANTABULOUS!"
+// );
+// console.log("review", pisghettyReview);
+// let pisghettyReview2 = await createReview(
+//   pisghetty._id.toString(),
+//   me._id.toString(),
+//   bennyId.toString(),
+//   "picture2.png",
+//   "meh [psie]",
+//   3,
+//   ["Spicy", "Saucy"],
+//   "THis rpightrertry was just ok"
+// );
 
-let reviewList = await reviewData.getReviewsFromRestaurant(String(bennyId))
-console.log(reviewList)
+// let reviewList = await reviewData.getReviewsFromRestaurant(String(bennyId))
+// console.log(reviewList)
 
-let reviewList2 = await reviewData.getReviewsFromUser(String(me._id))
-console.log(reviewList2)
+// let reviewList2 = await reviewData.getReviewsFromUser(String(me._id))
+// console.log(reviewList2)
 
-let user = await userData.getUserFromUsername("Mess1")
-console.log(user)
+// let user = await userData.getUserFromUsername("Mess1")
+// console.log(user)
 
-let dishes = await dishData.searchDishesFromName("spa")
-console.log(dishes)
+// let dishes = await dishData.searchDishesFromName("spa")
+// console.log(dishes)
 
-let srest = await restaurantData.searchRestaurantsFromName("bennn")
-console.log(srest)
+// let srest = await restaurantData.searchRestaurantsFromName("bennn")
+// console.log(srest)
 
-console.log(h.vInt(32))
+// console.log(h.vInt(32))
 
 // //create a user and a review first
 // let wowwee = await createComment(
@@ -71,5 +71,6 @@ console.log(h.vInt(32))
 //   pisghettyReview._id.toString()
 // );
 // console.log("comment", wowwee);
-
+let sortedList = await reviewData.getReviewsSorted("rating")
+console.log(sortedList)
 closeConnection();

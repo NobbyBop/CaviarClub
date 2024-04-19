@@ -31,6 +31,7 @@ import { getAllReviews } from "./review/getAllReviews.js";
 import { getReviewFromId } from "./review/getReviewFromId.js";
 import { getReviewsFromUser } from "./review/getReviewsFromUser.js";
 import { getReviewsFromRestaurant } from "./review/getReviewsFromRestaurant.js";
+import { getReviewsSorted } from "./review/getReviewsSorted.js";
 import { removeReview } from "./review/removeReview.js";
 export const reviewData = {
 	createReview,
@@ -38,6 +39,7 @@ export const reviewData = {
 	getReviewFromId,
 	getReviewsFromUser,
 	getReviewsFromRestaurant,
+	getReviewsSorted,
 	removeReview,
 };
 

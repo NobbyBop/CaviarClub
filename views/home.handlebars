@@ -1,11 +1,26 @@
 <link rel="stylesheet" href=".././public/css/home.css">
+<div id="errormsgs">
+    {{#if error}}
+    <p class="error">{{error}}</p>
+    {{/if}}
+</div>
 <article>
     <h1 id="title">Home</h1>
+    <form id="sortForm" action="/home" method="POST">
+        <label for="sort">Sort by:
+            <select id="sort">
+                <option value="recent">Recent</option>
+                <option value="alphabetical">A-Z</option>
+                <option value="rating">Rating</option>
+            </select>
+            <button type="submit">Refresh</button>
+        </label>
+    </form>
     <ul id="reviewList">
     {{#each reviews}}
         <li class="review">
             <section>
-                <a href="/view/review/{{this._id}}">[PICTURE HERE]{{this.title}}</a><br>
+                <a href="/view/review/{{this._id}}">[PICTURE HERE] {{this.title}}</a><br>
                 A review of: <a href="/view/dish/{{this.dishId}}">{{this.dishname}}</a><br>
                 By: <a href="/view/user/{{this.userId}}">{{this.username}}</a><br>
             </section>
