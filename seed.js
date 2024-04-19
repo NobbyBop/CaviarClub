@@ -1,112 +1,69 @@
-import mongoose from 'mongoose';
-import { ObjectId } from 'mongodb';
+import { createComment } from "./data/comment/createComment.js";
+import { createDish } from "./data/dish/createDish.js";
+import { createRestaurant } from "./data/restaurant/createRestaurant.js";
+import { createReview } from "./data/review/createReview.js";
+import { createUser } from "./data/user/createUser.js";
+import { dbConnection, closeConnection } from "./config/mongoConnection.js";
 
-//REMINDER TO CHANGE THE CONNECT TO THE ONE WE DECIDE ON
-mongoose.connect('mongodb://localhost:27017/yourDatabaseName', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+let connect = await dbConnection();
+await connect.dropDatabase();
 
-const Schema = mongoose.Schema;
+const users = [];
 
-const userSchema = new Schema({
-  email: String,
-  username: String,
-  password: String,
-  admin: Boolean
-});
+// Create sample users
+for (let i = 0; i < 10; i++) {
+	users.push(
+		await createUser(
+			`user${i}@example.com`,
+			`user${i}`,
+			`password${i}`,
+			i % 2 === 0 // Alternate between admin and regular user
+		)
+	);
+}
 
-const dishSchema = new Schema({
-  name: String
-});
+// Create sample restaurants and dishes
+const restaurantsData = [
+	{ name: "The Gourmet Kitchen", address: "123 Tasty Ave" },
+	{ name: "Soup & Salad Co.", address: "456 Healthy St" },
+	{ name: "BBQ Heaven", address: "789 Smoky Ln" },
+	{ name: "Sushi Palace", address: "321 Raw St" },
+	{ name: "Pasta House", address: "654 Noodle Blvd" },
+];
 
-const restaurantSchema = new Schema({
-  name: String,
-  address: String,
-  dishes: [dishSchema]
-});
+const dishes = [];
 
-const reviewSchema = new Schema({
-  dishId: ObjectId,
-  userId: ObjectId,
-  restaurantId: ObjectId,
-  rating: Number,
-  date: Date,
-  tags: [String],
-  title: String,
-  content: String,
-  comments: [{ userId: ObjectId, comment: String }]
-});
+for (const r of restaurantsData) {
+	const { _id, name } = await createRestaurant(r.name, r.address);
+	dishes.push(await createDish(`${name} Special 1`, _id.toString()));
+	dishes.push(await createDish(`${name} Special 2`, _id.toString()));
+}
 
-// Create models
-const User = mongoose.model('User', userSchema);
-const Restaurant = mongoose.model('Restaurant', restaurantSchema);
-const Review = mongoose.model('Review', reviewSchema);
+// Create sample reviews
+const reviews = [];
 
-async function seedDB() {
-    await mongoose.connection.dropDatabase();
-  
-    // Create sample users
-    const users = [];
-    for (let i = 0; i < 10; i++) {
-      users.push({
-        _id: new ObjectId(),
-        email: `user${i}@example.com`,
-        username: `user${i}`,
-        password: `password${i}`,
-        admin: i % 2 === 0  // Alternate between admin and regular user
-      });
-    }
-    await User.insertMany(users);
-  
-    // Create sample restaurants and dishes
-    const restaurantsData = [
-      { name: 'The Gourmet Kitchen', address: '123 Tasty Ave' },
-      { name: 'Soup & Salad Co.', address: '456 Healthy St' },
-      { name: 'BBQ Heaven', address: '789 Smoky Ln' },
-      { name: 'Sushi Palace', address: '321 Raw St' },
-      { name: 'Pasta House', address: '654 Noodle Blvd' }
-    ];
-  
-    const restaurants = restaurantsData.map(resto => ({
-      _id: new ObjectId(),
-      name: resto.name,
-      address: resto.address,
-      dishes: [
-        { _id: new ObjectId(), name: `${resto.name} Special 1` },
-        { _id: new ObjectId(), name: `${resto.name} Special 2` }
-      ]
-    }));
-  
-    await Restaurant.insertMany(restaurants);
-  
-    // Create sample reviews
-    const reviews = [];
-    for (let i = 0; i < 10; i++) {
-      const restaurant = restaurants[i % restaurants.length]; // Cycle through restaurants
-      const dish = restaurant.dishes[i % restaurant.dishes.length]; // Cycle through dishes
-      reviews.push({
-        _id: new ObjectId(),
-        dishId: dish._id,
-        userId: users[i % users.length]._id, // Cycle through users
-        restaurantId: restaurant._id,
-        rating: Math.ceil(Math.random() * 5), // Random rating from 1 to 5
-        date: new Date(),
-        tags: ['tag1', 'tag2', 'tag3'].slice(0, Math.ceil(Math.random() * 3)), // Up to 3 random tags
-        title: `Review Title ${i}`,
-        content: `Review content for ${dish.name} by user${i}`,
-        comments: [
-          { _id: new ObjectId(), userId: users[(i + 1) % users.length]._id, comment: 'Comment 1' },
-          { _id: new ObjectId(), userId: users[(i + 2) % users.length]._id, comment: 'Comment 2' }
-        ]
-      });
-    }
-  
-    await Review.insertMany(reviews);
-  
-    console.log('Database seeded successfully.');
-  }
+for (let i = 0; i < 10; i++) {
+	const { _id } = await createReview(
+		dishes[i % dishes.length]._id.toString(),
+		users[i % users.length]._id.toString(), // Cycle through users
+		null, //picture
+		`Review Title ${i}`,
+		Math.ceil(Math.random() * 5), // Random rating from 1 to 5
+		["tag1", "tag2", "tag3"].slice(0, Math.ceil(Math.random() * 3)), // Up to 3 random tags
+		`Review content for ${i % dishes.length} by user${i % users.length}`
+	);
+	await createComment(
+		"Comment 1",
+		users[(i + 1) % users.length]._id.toString(),
+		_id.toString()
+	);
+	await createComment(
+		"Comment 2",
+		users[(i + 2) % users.length]._id.toString(),
+		_id.toString()
+	);
+}
 
-seedDB().then(() => {
-  mongoose.disconnect();
-});
+console.log("Database seeded successfully.");
+
+closeConnection();
