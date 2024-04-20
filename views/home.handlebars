@@ -8,22 +8,23 @@
     <h1 id="title">Home</h1>
     <form id="sortForm" action="/home" method="POST">
         <label for="sort">Sort by:
-            <select id="sort">
+            <select id="sort" name="sort">
                 <option value="recent">Recent</option>
                 <option value="alphabetical">A-Z</option>
                 <option value="rating">Rating</option>
             </select>
-            <button type="submit">Refresh</button>
         </label>
+            <button type="submit">Refresh</button>
     </form>
     <ul id="reviewList">
     {{#each reviews}}
         <li class="review">
-            <section>
-                <a href="/view/review/{{this._id}}">[PICTURE HERE] {{this.title}}</a><br>
-                A review of: <a href="/view/dish/{{this.dishId}}">{{this.dishname}}</a><br>
-                By: <a href="/view/user/{{this.userId}}">{{this.username}}</a><br>
-            </section>
+            <a href="/view/review/{{this._id}}">[PICTURE HERE] {{this.title}}</a><br>
+            Rating: {{this.rating}}<br>
+            Posted: {{this.date}}<br>
+            A review of: <a href="/view/dish/{{this.dishId}}">{{this.dishName}}</a><br>
+            at <a href="/view/restaurant/{{this.restaurantId}}">{{this.restaurantName}}</a><br>
+            By: <a href="/view/user/{{this.userId}}">{{this.username}}</a><br>
         </li>
     {{/each}}
     </ul>

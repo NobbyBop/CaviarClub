@@ -47,7 +47,7 @@ for (let i = 0; i < 10; i++) {
 		dishes[i % dishes.length]._id.toString(),
 		users[i % users.length]._id.toString(), // Cycle through users
 		null, //picture
-		`Review Title ${i}`,
+		`[${String.fromCharCode(Math.floor(Math.random() * 26) + 97)}]Review Title ${i}`,
 		Math.ceil(Math.random() * 5), // Random rating from 1 to 5
 		["tag1", "tag2", "tag3"].slice(0, Math.ceil(Math.random() * 3)), // Up to 3 random tags
 		`Review content for ${i % dishes.length} by user${i % users.length}`
