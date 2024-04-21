@@ -39,26 +39,61 @@ for (const r of restaurantsData) {
 	dishes.push(await createDish(`${name} Special 2`, _id.toString()));
 }
 
+const reviewData = [
+	{
+		rating: 4.5,
+		title: "Delicious Italian Dinner at Restaurant Name",
+		tags: ["Italian", "Pasta", "Pizza"],
+		content:
+			"Last night, I had the pleasure of dining at Restaurant Name, and it was an absolutely delightful experience from start to finish. As soon as we walked in, we were greeted warmly by the staff, and the ambiance was cozy and inviting. For starters, we ordered the bruschetta, which was fresh and bursting with flavor. For the main course, I had the spaghetti carbonara, and it was hands down the best I've ever had. The pasta was perfectly cooked, and the sauce was creamy and rich without being too heavy. My partner opted for the quattro stagioni pizza, and it was equally delicious. Each topping was fresh, and the crust was thin and crispy, just the way we like it. We finished off our meal with tiramisu for dessert, and it was the perfect ending to a perfect meal. Overall, I would highly recommend Restaurant Name to anyone looking for authentic Italian cuisine in a cozy atmosphere.\nLast night, I had the pleasure of dining at Restaurant Name, and it was an absolutely delightful experience from start to finish. As soon as we walked in, we were greeted warmly by the staff, and the ambiance was cozy and inviting. For starters, we ordered the bruschetta, which was fresh and bursting with flavor. For the main course, I had the spaghetti carbonara, and it was hands down the best I've ever had. The pasta was perfectly cooked, and the sauce was creamy and rich without being too heavy. My partner opted for the quattro stagioni pizza, and it was equally delicious. Each topping was fresh, and the crust was thin and crispy, just the way we like it. We finished off our meal with tiramisu for dessert, and it was the perfect ending to a perfect meal. Overall, I would highly recommend Restaurant Name to anyone looking for authentic Italian cuisine in a cozy atmosphere.\nLast night, I had the pleasure of dining at Restaurant Name, and it was an absolutely delightful experience from start to finish. As soon as we walked in, we were greeted warmly by the staff, and the ambiance was cozy and inviting. For starters, we ordered the bruschetta, which was fresh and bursting with flavor. For the main course, I had the spaghetti carbonara, and it was hands down the best I've ever had. The pasta was perfectly cooked, and the sauce was creamy and rich without being too heavy. My partner opted for the quattro stagioni pizza, and it was equally delicious. Each topping was fresh, and the crust was thin and crispy, just the way we like it. We finished off our meal with tiramisu for dessert, and it was the perfect ending to a perfect meal. Overall, I would highly recommend Restaurant Name to anyone looking for authentic Italian cuisine in a cozy atmosphere.",
+		comments: [
+			"I totally agree! Restaurant Name is my go-to spot for Italian food in town.",
+			"I've been meaning to try Restaurant Name. After reading your review, I'll definitely make a reservation soon!",
+		],
+	},
+	{
+		rating: 3.8,
+		title: "Authentic Japanese Experience at Other Restaurant",
+		tags: ["Japanese", "Sushi", "Sashimi"],
+		content:
+			"I recently visited Other Restaurant for dinner, and I was quite impressed with the overall experience. The restaurant has a modern yet cozy atmosphere, and the staff were welcoming and attentive throughout the meal. We started with the miso soup and edamame, both of which were tasty and well-prepared. For the main course, we ordered a variety of sushi rolls and sashimi. The fish was incredibly fresh, and each piece was expertly crafted. The dragon roll, in particular, was a standout with its perfect balance of flavors and textures. However, I found some of the rolls to be a bit on the smaller side, which was a bit disappointing. Overall, while Other Restaurant delivered an authentic Japanese dining experience with its fresh and delicious food, the portion sizes could have been more generous.\nLast night, I had the pleasure of dining at Restaurant Name, and it was an absolutely delightful experience from start to finish. As soon as we walked in, we were greeted warmly by the staff, and the ambiance was cozy and inviting. For starters, we ordered the bruschetta, which was fresh and bursting with flavor. For the main course, I had the spaghetti carbonara, and it was hands down the best I've ever had. The pasta was perfectly cooked, and the sauce was creamy and rich without being too heavy. My partner opted for the quattro stagioni pizza, and it was equally delicious. Each topping was fresh, and the crust was thin and crispy, just the way we like it. We finished off our meal with tiramisu for dessert, and it was the perfect ending to a perfect meal. Overall, I would highly recommend Restaurant Name to anyone looking for authentic Italian cuisine in a cozy atmosphere.\nLast night, I had the pleasure of dining at Restaurant Name, and it was an absolutely delightful experience from start to finish. As soon as we walked in, we were greeted warmly by the staff, and the ambiance was cozy and inviting. For starters, we ordered the bruschetta, which was fresh and bursting with flavor. For the main course, I had the spaghetti carbonara, and it was hands down the best I've ever had. The pasta was perfectly cooked, and the sauce was creamy and rich without being too heavy. My partner opted for the quattro stagioni pizza, and it was equally delicious. Each topping was fresh, and the crust was thin and crispy, just the way we like it. We finished off our meal with tiramisu for dessert, and it was the perfect ending to a perfect meal. Overall, I would highly recommend Restaurant Name to anyone looking for authentic Italian cuisine in a cozy atmosphere.",
+		comments: [
+			"I had a similar experience at Other Restaurant. The quality of the sushi was top-notch, but I wished the portions were a bit bigger.",
+			"I love Other Restaurant! The quality of their sushi is unmatched in town.",
+		],
+	},
+	{
+		rating: 5,
+		title: "Unforgettable French Cuisine at Another Restaurant",
+		tags: ["French", "Fine Dining", "Wine"],
+		content:
+			"Another Restaurant is a hidden gem tucked away in the heart of the city, and it offers an unforgettable dining experience. From the moment you walk in, you are transported to a cozy French bistro with its charming decor and warm ambiance. The service is impeccable, with the staff being both friendly and knowledgeable about the menu and wine pairings. We started our meal with the escargot, which was cooked to perfection and served with a delicious garlic butter sauce. For the main course, I had the coq au vin, and it was absolutely divine. The chicken was tender, and the sauce was rich and flavorful. My dining companion opted for the beef bourguignon, and it was equally delicious. We paired our meal with a bottle of Bordeaux, recommended by our server, and it complemented the meal perfectly. We ended the evening with crème brûlée, which was the perfect ending to a perfect meal. Overall, Another Restaurant exceeded all of our expectations, and I can't wait to return.\nAnother Restaurant is a hidden gem tucked away in the heart of the city, and it offers an unforgettable dining experience. From the moment you walk in, you are transported to a cozy French bistro with its charming decor and warm ambiance. The service is impeccable, with the staff being both friendly and knowledgeable about the menu and wine pairings. We started our meal with the escargot, which was cooked to perfection and served with a delicious garlic butter sauce. For the main course, I had the coq au vin, and it was absolutely divine. The chicken was tender, and the sauce was rich and flavorful. My dining companion opted for the beef bourguignon, and it was equally delicious. We paired our meal with a bottle of Bordeaux, recommended by our server, and it complemented the meal perfectly. We ended the evening with crème brûlée, which was the perfect ending to a perfect meal. Overall, Another Restaurant exceeded all of our expectations, and I can't wait to return.\nAnother Restaurant is a hidden gem tucked away in the heart of the city, and it offers an unforgettable dining experience. From the moment you walk in, you are transported to a cozy French bistro with its charming decor and warm ambiance. The service is impeccable, with the staff being both friendly and knowledgeable about the menu and wine pairings. We started our meal with the escargot, which was cooked to perfection and served with a delicious garlic butter sauce. For the main course, I had the coq au vin, and it was absolutely divine. The chicken was tender, and the sauce was rich and flavorful. My dining companion opted for the beef bourguignon, and it was equally delicious. We paired our meal with a bottle of Bordeaux, recommended by our server, and it complemented the meal perfectly. We ended the evening with crème brûlée, which was the perfect ending to a perfect meal. Overall, Another Restaurant exceeded all of our expectations, and I can't wait to return.",
+		comments: [
+			"I couldn't agree more! Another Restaurant is one of my favorite restaurants in town.",
+			"I've been meaning to try Another Restaurant. After reading your review, I'll definitely make a reservation soon!",
+		],
+	},
+];
+
 // Create sample reviews
-const reviews = [];
 
 for (let i = 0; i < 10; i++) {
 	const { _id } = await createReview(
 		dishes[i % dishes.length]._id.toString(),
 		users[i % users.length]._id.toString(), // Cycle through users
 		null, //picture
-		`[${String.fromCharCode(Math.floor(Math.random() * 26) + 97)}]Review Title ${i}`,
-		Math.ceil(Math.random() * 5), // Random rating from 1 to 5
-		["tag1", "tag2", "tag3"].slice(0, Math.ceil(Math.random() * 3)), // Up to 3 random tags
-		`Review content for ${i % dishes.length} by user${i % users.length}`
+		reviewData[i % reviewData.length].title,
+		reviewData[i % reviewData.length].rating, // Random rating from 1 to 5
+		reviewData[i % reviewData.length].tags, // Up to 3 random tags
+		reviewData[i % reviewData.length].content
 	);
 	await createComment(
-		"Comment 1",
+		reviewData[i % reviewData.length].comments[0],
 		users[(i + 1) % users.length]._id.toString(),
 		_id.toString()
 	);
 	await createComment(
-		"Comment 2",
+		reviewData[i % reviewData.length].comments[1],
 		users[(i + 2) % users.length]._id.toString(),
 		_id.toString()
 	);

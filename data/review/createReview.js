@@ -9,6 +9,7 @@ import { reviews, restaurants } from "../../config/mongoCollections.js";
 import { getDishFromId } from "../dish/getDishFromId.js";
 import { getReviewsFromDishId } from "./getReviewsFromDishId.js";
 import { ObjectId } from "mongodb";
+import { getUserFromId } from "../user/getUserFromId.js";
 
 export const createReview = async (
 	dishId,
@@ -27,13 +28,20 @@ export const createReview = async (
 	content = checkString(content);
 	checkTags(tags);
 
+	const user = await getUserFromId(userId);
+
+	const dish = await getDishFromId(dishId);
+	if (!dish) throw new Error("Error: reviewed dish does not exist.");
+
 	let currentDay = new Date();
 	let dateString = createDateString(currentDay);
 
 	const newReview = {
 		_id: new ObjectId(),
 		dishId: new ObjectId(dishId),
+		dishname: dish.name,
 		userId: new ObjectId(userId),
+		username: user.username,
 		picture: picture,
 		rating: rating,
 		date: dateString,
@@ -44,8 +52,7 @@ export const createReview = async (
 	};
 
 	//Average rating update for dish being reviewed
-	const ratingToUpdate = await getDishFromId(dishId);
-	if (!ratingToUpdate) throw new Error("Error: reviewed dish does not exist.");
+	const ratingToUpdate = dish;
 	const reviewsByDish = await getReviewsFromDishId(dishId);
 
 	const pre = reviewsByDish.length * ratingToUpdate.averageRating;

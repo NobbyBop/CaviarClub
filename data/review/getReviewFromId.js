@@ -6,7 +6,7 @@ export const getReviewFromId = async (reviewId) => {
 	reviewId = checkId(reviewId);
 
 	const reviewCollection = await reviews();
-	const review = reviewCollection.findOne({
+	const review = await reviewCollection.findOne({
 		_id: new ObjectId(reviewId),
 	});
 	if (review === null) throw new Error("No review with that Id");
