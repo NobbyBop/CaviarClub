@@ -1,7 +1,7 @@
 import { users } from "../../config/mongoCollections.js";
 import { checkEmail, checkString } from "../../helpers.js";
-import { getUserFromUsername } from "./getUserFromUsername.js";
 import { ObjectId } from "mongodb";
+import bcrypt from "bcrypt";
 
 export const createUser = async (email, username, password, admin) => {
 	email = checkEmail(email);
@@ -10,11 +10,12 @@ export const createUser = async (email, username, password, admin) => {
 	if (typeof admin !== "boolean") throw new Error("Admin must be a boolean");
 	//prob change how we do this later like default it to false but whatever
 
-	let existingUser;
-	try {
-		existingUser = await getUserFromUsername(username);
-	} catch (error) {}
-	if (existingUser) throw new Error("Username not available.");
+	const userCollection = await users();
+
+	if ((await userCollection.findOne({ username })) != null)
+		throw new Error("Username not available.");
+
+	password = await bcrypt.hash(password, 12);
 
 	const newUser = {
 		_id: new ObjectId(),
@@ -24,7 +25,6 @@ export const createUser = async (email, username, password, admin) => {
 		admin: admin,
 	};
 
-	const userCollection = await users();
 	const insertInfo = await userCollection.insertOne(newUser);
 	if (!insertInfo.acknowledged || !insertInfo.insertedId)
 		throw new Error("Could not add user");

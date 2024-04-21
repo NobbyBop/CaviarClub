@@ -9,8 +9,6 @@
 		"sourceType": "module"
 	},
 	"rules": {
-		"no-unused-vars": "warn",
-		"no-mixed-spaces-and-tabs": "warn",
-		"prefer-const": "warn"
+		"no-mixed-spaces-and-tabs": 0
 	}
 }
