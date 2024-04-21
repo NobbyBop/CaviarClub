@@ -9,27 +9,27 @@ router.route("/:reviewId").get(async (req, res) => {
 	try {
 		reviewId = checkId(req.params.reviewId.toString());
 	} catch ({ message }) {
-		return res.render("error", message);
+		return res.render("error", { message });
 	}
 
 	let review;
 	try {
 		review = await getReviewFromId(reviewId);
 	} catch ({ message }) {
-		return res.render("error", message);
+		return res.render("error", { message });
 	}
 
 	let dishId;
 	try {
 		dishId = checkId(review.dishId.toString());
 	} catch ({ message }) {
-		return res.render("error", message);
+		return res.render("error", { message });
 	}
 	let restaurant;
 	try {
 		restaurant = await getRestaurantFromDishId(dishId);
 	} catch ({ message }) {
-		return res.render("error", message);
+		return res.render("error", { message });
 	}
 
 	//this seems so dumb... we should probably do this in the data functions
