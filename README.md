@@ -49,16 +49,20 @@ when db functions are created, put the schema used here. If you need to update t
 {
    _id: ObjectId(),
    dishId: ObjectId(),
+   dishName: String           //new
    userId: ObjectId(),
+   username: string           //new
    picture: null,
    rating: number,
    date: string,
+   title, string
    tags: [
       string
    ],
    content: string,
    comments: [
       userId: ObjectId(),
+      username: string,       //new
 		comment: string,
    ],
 }
