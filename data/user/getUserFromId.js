@@ -12,5 +12,7 @@ export const getUserFromId = async (userId) => {
 
 	if (!user) throw new Error("No user with that ID");
 
+	delete user.password;
+
 	return user;
 };
