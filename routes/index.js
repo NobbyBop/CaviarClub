@@ -12,6 +12,8 @@ import viewUserRoutes from "./view/user.js";
 
 import homeRoutes from "./home.js";
 
+import { static as staticDir } from "express";
+
 export default (app) => {
 	app.use("/home", homeRoutes);
 	app.use("/view/restaurant", viewRestaurantRoutes);
@@ -23,6 +25,8 @@ export default (app) => {
 	app.use("/create/user", createUserRoutes);
 	app.use("/auth/login", loginRoutes);
 	app.use("/auth/signup", signupRoutes);
+
+	app.use("/public", staticDir("public"));
 
 	app.use("*", (req, res) => {
 		return res.status(404).send("not found");

@@ -1,0 +1,29 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+}
+
+main {
+	padding-left: 20%;
+	padding-right: 20%;
+}
+
+nav {
+	width: 100%;
+	display: flex;
+	position: fixed;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-left: 5%;
+	padding-right: 5%;
+	padding-top: 20px;
+}
+
+nav div {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+}
