@@ -1,0 +1,31 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div id="errors">
+{{#if error}}
+<p class="error">{{error}}</p>
+{{/if}}
+</div>
+<form action="signup" method="POST" name="signup-form" id="signup-form">
+    <label for="username">Username
+        <input type="text" name="username" id="username" value="{{prevSub.username}}">
+    </label>
+    <br>
+    <label for="email">Email
+        <input type="text" name="email" id="email" value="{{prevSub.email}}">
+    </label>
+    <br>
+    <label for="password">Password
+        <input type="password" name="password" id="password" value="{{prevSub.password}}">
+    </label>
+    <br>
+    <label for="confirmPassword">Confirm Password
+        <input type="password" name="confirmPassword" id="confirmPassword" value="{{prevSub.confirmPassword}}">
+    </label>
+    <br>
+    <button type="submit" name="submitButton" id="submitButton">Submit</button>
+</form>
+<a href="/auth/login">Already have an account? Click here to log-in.</a>

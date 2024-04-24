@@ -21,7 +21,7 @@ router.route("/").get(async (req, res) => {
 		email: result.email,
 		username: result.username,
 		password: result.password,
-		admin: result.admin,s
+		admin: result.admin
 	    }
       return res.redirect("/home")
     } catch(e) {
