@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="/public/css/view/dish.css" />
+
+<div>
+	<h1>{{title}}
+		from
+		<a href="/view/restaurant/{{restaurantId}}">{{restaurantName}}</a></h1>
+	<h2>Average Rating: {{averageRating}} out of 5</h2>
+	<h3>Reviews:</h3>
+	<ul id="reviews">
+		{{#each dishReviews}}
+			<li id="item" class="item">
+				<a id="picTitle" href="/view/review/{{this._id}}">
+					<h4 class="pic">{{this.picture}}</h4>
+					<h4 class="reviewTitle">{{this.title}}</h4>
+
+					<p class="DateRate">Date: {{this.date}}</p>
+					<p class="DateRate">Rating: {{this.rating}} out of 5</p>
+					<ul class="tags" id="Tag">
+						<h4 id="Tags">Tags:</h4>
+						{{#each this.tags}}
+							<li class="tag" id="Tags">{{this}}</li>
+						{{/each}}
+					</ul>
+					<p>{{this.content}}</p>
+				</a>
+			</li>
+		{{/each}}
+	</ul>
+</div>
