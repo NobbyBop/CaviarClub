@@ -5,6 +5,8 @@ import { getRestaurantFromDishId } from "../../data/restaurant/getRestaurantFrom
 const router = Router();
 
 router.route("/:reviewId").get(async (req, res) => {
+	let name = undefined
+    if(req.session && req.session.user) name = req.session.user.username
 	let reviewId;
 	try {
 		reviewId = checkId(req.params.reviewId.toString());
@@ -46,6 +48,7 @@ router.route("/:reviewId").get(async (req, res) => {
 		title: `${review.dishname}: Review`,
 		review,
 		restaurant,
+		username: name
 	});
 });
 

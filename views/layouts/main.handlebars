@@ -9,13 +9,22 @@
 		<nav>
 			<a class="buttons" href="/">Home</a>
 			<div>
+				{{#if username}}
 				<a class="buttons" href="/create/restaurant/">Create Review</a>
+				<a class="buttons" href="/auth/logout">Logout</a>
+				{{else}} 
 				<a class="buttons" href="/auth/login">Login</a>
+				<a class="buttons" href="/auth/signup">Sign Up</a>
+				{{/if}}
+				
 			</div>
 		</nav>
 		<br>
 		<main>
 			{{{body}}}
 		</main>
+		{{#if username}}
+		<p>Current User: {{username}}</p>
+		{{/if}}
 	</body>
 </html>
