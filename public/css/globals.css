@@ -2,8 +2,16 @@
 	box-sizing: border-box;
 }
 
+:root {
+	--gray: #f3f5f5;
+	--blue: #1c609b;
+	--light-blue: #90bcd6;
+	--orange: #b6615b;
+	--brown: #c29a76;
+}
+
 body {
-	background-color: #F3F5F5;
+	background-color: var(--gray);
 	margin: 0;
 }
 
@@ -13,7 +21,7 @@ main {
 }
 
 nav {
-	background-color: #1C609B;
+	background-color: var(--blue);
 	width: 100%;
 	display: flex;
 	position: fixed;
@@ -22,6 +30,7 @@ nav {
 	padding-left: 5%;
 	padding-right: 5%;
 	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 nav div {
@@ -30,10 +39,10 @@ nav div {
 	gap: 20px;
 }
 .buttons {
-	background-color: #B6615B;
-    color: #F3F5F5;
+	background-color: var(--orange);
+	color: var(--gray);
 	text-decoration: none;
-    padding: .25% 10px;
-    border-radius: 2px;
-    margin-right: 10px;
+	padding: 0.25% 10px;
+	border-radius: 2px;
+	margin-right: 10px;
 }

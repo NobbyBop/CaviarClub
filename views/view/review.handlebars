@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/public/css/view/review.css" />
-<div>
+<div id="container">
 	<img src="{{review.picture}}" alt="{{review.title}}" />
 	<div id="header-container">
 		<h1 id="rating">{{review.rating}} <span>out of</span> 5</h1>
@@ -37,7 +37,11 @@
 	<ul id="comments">
 		{{#each review.comments}}
 			<li class="comment-item">
-				<a class="username" id="comment-user" href="/view/user/{{this.userId}}">{{this.username}}</a>
+				<a
+					class="username"
+					id="comment-user"
+					href="/view/user/{{this.userId}}"
+				>{{this.username}}</a>
 				<p>{{this.comment}}</p>
 			</li>
 		{{/each}}

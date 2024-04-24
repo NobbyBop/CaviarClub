@@ -1,57 +1,56 @@
 main {
-    background-color: #F3F5F5;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+	background-color: var(--gray);
+	padding-top: 40px;
+	font-family: Arial, sans-serif;
 }
 ul#reviews {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    color: black;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	color: black;
 }
 h1 {
-    text-align: center;
+	text-align: center;
 }
 ul#Tag {
-    list-style: none;
-    margin: 0;
+	list-style: none;
+	margin: 0;
 }
 #Tags {
-    display: inline-block;
-    background-color: #C29A76;
-    margin: 0;
-    margin-bottom: 5px;
+	display: inline-block;
+	background-color: var(--orange);
+	margin: 0;
+	margin-bottom: 5px;
 }
 .DateRate {
-    margin: .5%;
-    display: inline-block;
-    font-size: 14px;
-    margin-bottom: 10px;
+	margin: 0.5%;
+	display: inline-block;
+	font-size: 14px;
+	margin-bottom: 10px;
 }
 #picTitle h4 {
-    display: inline;
+	display: inline;
 }
 p {
-    display: inline;
+	display: inline;
 }
 .item {
-    border-radius: 8px;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: #90BCD6;
-    
+	border-radius: 8px;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	margin-bottom: 20px;
+	background-color: var(--light-blue);
 }
 .item a {
-    text-decoration: none;
-    color: black;
+	text-decoration: none;
+	color: black;
 }
 h1 a {
-    text-decoration: none;
-    color: black;
+	text-decoration: none;
+	color: black;
 }
 .item h4 {
-    margin-top: 0;
+	margin-top: 0;
 }
 /* .item h4 img {
     width: 50px;
@@ -61,25 +60,25 @@ h1 a {
     vertical-align: middle;
 } */
 .tags h4 {
-    display: inline-block;
-    background-color: #C29A76;
-    color: #F3F5F5;
-    padding: 5px 10px;
-    border-radius: 4px;
-    margin-right: 10px;
-    margin-bottom: 1%;
+	display: inline-block;
+	background-color: var(--orange);
+	color: var(--gray);
+	padding: 5px 10px;
+	border-radius: 4px;
+	margin-right: 10px;
+	margin-bottom: 1%;
 }
 
 .tag {
-    display: inline-block;
-    background-color: #C29A76;
-    color: black;
-    padding: 5px 10px;
-    border-radius: 4px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+	display: inline-block;
+	background-color: var(--orange);
+	color: black;
+	padding: 5px 10px;
+	border-radius: 4px;
+	margin-right: 5px;
+	margin-bottom: 5px;
 }
 
 .item p {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
