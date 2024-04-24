@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { getUserFromId } from "../../data/user/getUserFromId.js";
-import { getReviewsFromUser } from "../../data/user/getReviewsFromUser.js";
+import { getReviewsFromUser } from "../../data/review/getReviewsFromUser.js";
 
 const router = Router();
 
