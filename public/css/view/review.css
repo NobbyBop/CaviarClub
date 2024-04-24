@@ -1,6 +1,6 @@
 img {
 	width: 100%;
-	background-color: aquamarine;
+	background-color: #90BCD6;
 	object-fit: cover;
 	height: 40vh;
 }
@@ -34,6 +34,16 @@ ul {
 	list-style-type: none;
 }
 
+.username {
+	text-decoration: none;
+}
+#user-link {
+	color: black;
+}
+#comment-user {
+	color: #F3F5F5;
+}
+
 #tags li {
 	display: inline;
 	padding: 0;
@@ -41,7 +51,7 @@ ul {
 	border-radius: 3px;
 	margin-left: 10px;
 	/* it would be cool to add color information to the tags in review object */
-	background-color: aquamarine;
+	background-color: #C29A76;
 }
 
 #restaurant-link {
@@ -66,7 +76,6 @@ ul {
 	margin: 0;
 	padding: 0;
 }
-
 hr {
 	width: 100%;
 	margin-top: 50px;
@@ -90,7 +99,7 @@ h2 {
 }
 
 .comment-item {
-	background-color: rgb(255, 220, 206);
+	background-color: #B6615B;
 	width: 100%;
 	border-radius: 10px;
 	padding: 10px;

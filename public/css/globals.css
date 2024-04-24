@@ -3,6 +3,7 @@
 }
 
 body {
+	background-color: #F3F5F5;
 	margin: 0;
 }
 
@@ -12,6 +13,7 @@ main {
 }
 
 nav {
+	background-color: #1C609B;
 	width: 100%;
 	display: flex;
 	position: fixed;
@@ -26,4 +28,12 @@ nav div {
 	display: flex;
 	flex-direction: row;
 	gap: 20px;
+}
+.buttons {
+	background-color: #B6615B;
+    color: #F3F5F5;
+	text-decoration: none;
+    padding: .25% 10px;
+    border-radius: 2px;
+    margin-right: 10px;
 }

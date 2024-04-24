@@ -24,6 +24,7 @@
 		<p>
 			Author:
 			<a
+				class="username"
 				id="user-link"
 				href="/view/user/{{review.userId}}"
 			>{{review.username}}</a>
@@ -36,7 +37,7 @@
 	<ul id="comments">
 		{{#each review.comments}}
 			<li class="comment-item">
-				<a href="/view/user/{{this.userId}}">{{this.username}}</a>
+				<a class="username" id="comment-user" href="/view/user/{{this.userId}}">{{this.username}}</a>
 				<p>{{this.comment}}</p>
 			</li>
 		{{/each}}
