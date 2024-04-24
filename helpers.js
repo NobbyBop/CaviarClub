@@ -90,3 +90,21 @@ export const vInt = (num) => {
 	if (!Number.isInteger(num)) throw new Error("Not an integer!");
 	return num;
 };
+
+export const checkUser = (str) => {
+    if(str===undefined) throw "Userame not provided!"
+    if(typeof str !== "string") throw "Username not a string!"
+    str=str.trim()
+    if(str.length === 0) throw "Username not provided!"
+    if(str.length < 5 || str.length > 10) throw "Username must be between 5 and 10 characters!"
+    return str.toLowerCase()
+}
+
+export const checkPass = (str) => {
+    if(str===undefined) throw "Password not provided!"
+    if(typeof str !== "string") throw "Password not a string!"
+    str=str.trim()
+    if(str.length === 0) throw "Password not provided!"
+    if(!/^(?!.*\s)(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(str)) throw "Password does not meet requirements!"
+    return str
+}

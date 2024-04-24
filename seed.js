@@ -16,7 +16,7 @@ for (let i = 0; i < 10; i++) {
 		await createUser(
 			`user${i}@example.com`,
 			`user${i}`,
-			`password${i}`,
+			`P@ssword${i}`,
 			i % 2 === 0 // Alternate between admin and regular user
 		)
 	);
