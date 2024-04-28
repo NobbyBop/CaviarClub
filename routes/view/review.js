@@ -5,33 +5,35 @@ import { getRestaurantFromDishId } from "../../data/restaurant/getRestaurantFrom
 const router = Router();
 
 router.route("/:reviewId").get(async (req, res) => {
-	let name = undefined
-    if(req.session && req.session.user) name = req.session.user.username
+	let username, userId;
+	if (req.session && req.session.user) {
+		[username, userId] = req.session.user;
+	}
 	let reviewId;
 	try {
 		reviewId = checkId(req.params.reviewId.toString());
 	} catch ({ message }) {
-		return res.render("error", { message });
+		return res.render("error", { message, username, userId });
 	}
 
 	let review;
 	try {
 		review = await getReviewFromId(reviewId);
 	} catch ({ message }) {
-		return res.render("error", { message });
+		return res.render("error", { message, username, userId });
 	}
 
 	let dishId;
 	try {
 		dishId = checkId(review.dishId.toString());
 	} catch ({ message }) {
-		return res.render("error", { message });
+		return res.render("error", { message, username, userId });
 	}
 	let restaurant;
 	try {
 		restaurant = await getRestaurantFromDishId(dishId);
 	} catch ({ message }) {
-		return res.render("error", { message });
+		return res.render("error", { message, username, userId });
 	}
 
 	//this seems so dumb... we should probably do this in the data functions
@@ -48,7 +50,8 @@ router.route("/:reviewId").get(async (req, res) => {
 		title: `${review.dishname}: Review`,
 		review,
 		restaurant,
-		username: name
+		username,
+		userId,
 	});
 });
 
