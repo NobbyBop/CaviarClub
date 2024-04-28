@@ -5,6 +5,9 @@ import { getDishesFromRestaurantId } from "../../data/dish/getDishesFromRestaura
 const router = Router();
 
 router.route("/:restaurantId").get(async (req, res) => {
+	let username, userId;
+	if (req.session && req.session.user) [username, userId] = req.session.user;
+
 	let restaurantId;
 	try {
 		restaurantId = checkId(req.params.restaurantId.toString());
@@ -30,6 +33,8 @@ router.route("/:restaurantId").get(async (req, res) => {
 		title: `${restaurant.name} | Restaurant`,
 		restaurant,
 		dishes,
+		username,
+		userId,
 	});
 });
 

@@ -1,5 +1,6 @@
 import loginRoutes from "./auth/login.js";
 import signupRoutes from "./auth/signup.js";
+import logoutRoutes from "./auth/logout.js"
 
 import createDishRoutes from "./create/dish.js";
 import createRestaurantRoutes from "./create/restaurant.js";
@@ -25,6 +26,7 @@ export default (app) => {
   app.use("/create/user", createUserRoutes);
   app.use("/auth/login", loginRoutes);
   app.use("/auth/signup", signupRoutes);
+  app.use("/auth/logout", logoutRoutes);
 
   app.use("*", (req, res) => {
     return res.status(404).send("not found");

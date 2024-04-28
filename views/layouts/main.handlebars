@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -9,13 +8,23 @@
 		<nav>
 			<a class="buttons" href="/">Home</a>
 			<div>
-				<a class="buttons" href="/create/restaurant/">Create Review</a>
-				<a class="buttons" href="/auth/login">Login</a>
+				{{#if username}}
+					<a class="buttons" href="/create/restaurant/">Create Review</a>
+					<a class="buttons" href="/auth/logout">Logout</a>
+					<a class="buttons" href="/view/user/{{userId}}">{{username}}</a>
+				{{else}}
+					<a class="buttons" href="/auth/login">Login</a>
+					<a class="buttons" href="/auth/signup">Sign Up</a>
+				{{/if}}
+
 			</div>
 		</nav>
-		<br>
+		<br />
 		<main>
 			{{{body}}}
 		</main>
+		{{#if username}}
+			<p>Current User: {{username}}</p>
+		{{/if}}
 	</body>
 </html>

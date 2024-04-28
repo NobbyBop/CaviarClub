@@ -1,0 +1,25 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div id="errors">
+{{#if error}}
+<p class="error">{{error}}</p>
+{{/if}}
+</div>
+
+<form action="login" method="POST" id="signin-form">
+    <label for="username">Username
+        <input type="text" name="username" id="username" value="{{prevSub.username}}">
+    </label>
+    <br>
+    <label for="password">Password
+        <input type="password" name="password" id="password" value="{{prevSub.password}}"> 
+    </label>
+    <button type="submit" name="submitButton" id="submitButton">Submit</button>
+</form>
+<a href="/auth/signup">Don't have an account? Sign up!</a>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src='/public/js/login.js'></script>

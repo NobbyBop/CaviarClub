@@ -6,32 +6,34 @@ import { getReviewsFromDishId } from "../../data/review/getReviewsFromDishId.js"
 const router = Router();
 
 router.route("/:dishId").get(async (req, res) => {
+	let username, userId;
+	if (req.session && req.session.user) [username, userId] = req.session.user;
 	let dishId;
 	try {
 		dishId = checkId(req.params.dishId);
 	} catch ({ message }) {
-		return res.render("error", { message });
+		return res.render("error", { message, username: name });
 	}
 
 	let dish;
 	try {
 		dish = await getDishFromId(dishId);
 	} catch ({ message }) {
-		return res.render("error", { message });
+		return res.render("error", { message, username: name });
 	}
 
 	let restaurant;
 	try {
 		restaurant = await getRestaurantFromDishId(dishId);
 	} catch ({ message }) {
-		return res.render("error", { message });
+		return res.render("error", { message, username: name });
 	}
 
 	let reviews;
 	try {
 		reviews = await getReviewsFromDishId(dishId);
 	} catch ({ message }) {
-		return res.render("error", { message });
+		return res.render("error", { message, username: name });
 	}
 
 	reviews.map((review) => {
@@ -45,6 +47,8 @@ router.route("/:dishId").get(async (req, res) => {
 		averageRating: dish.averageRating,
 		dishReviews: reviews,
 		dishId: dish._id,
+		username,
+		userId,
 	});
 });
 
