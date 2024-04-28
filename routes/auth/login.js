@@ -30,7 +30,6 @@ router
 				userId: result._id,
 				admin: result.admin,
 			};
-			console.log("login route", result);
 			return res.redirect("/home");
 		} catch (e) {
 			return res

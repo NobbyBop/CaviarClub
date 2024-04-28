@@ -16,7 +16,6 @@ router
 			name = req.session.user.username;
 			userId = req.session.user.userId;
 		}
-		console.log("home.get", req.session.user);
 		try {
 			let allReviews = await reviewData.getAllReviews();
 			try {
