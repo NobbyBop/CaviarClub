@@ -1,0 +1,25 @@
+<section>
+	<h1>{{user.username}}'s Profile</h1>
+	<div id="user-info">
+		<p><strong>Username:</strong> {{user.username}}</p>
+		<p><strong>Email:</strong> {{user.email}}</p>
+		<!-- Additional user fields can be added here -->
+	</div>
+</section>
+
+<section>
+	<h2>Reviews by {{user.username}}</h2>
+	{{#if reviews.length}}
+		<ul id="review-list">
+			{{#each reviews}}
+				<li class="review-item">
+					<a href="/view/review/{{this._id}}">{{this.title}}</a>
+					<p>Date: {{this.date}}</p>
+					<p>{{this.summary}}</p>
+				</li>
+			{{/each}}
+		</ul>
+	{{else}}
+		<p>No reviews to display.</p>
+	{{/if}}
+</section>
