@@ -7,9 +7,10 @@
 	<body>
 		<nav>
 			<a class="buttons" href="/">Home</a>
+			<div id="nameofsite">&#8756Caviar Club&#8756</div>
 			<div>
 				{{#if username}}
-					<a class="buttons" href="/create/restaurant/">Create Review</a>
+					<a class="buttons" href="/create/review/">Create Review</a>
 					<a class="buttons" href="/auth/logout">Logout</a>
 					<a class="buttons" href="/view/user/{{userId}}">{{username}}</a>
 				{{else}}

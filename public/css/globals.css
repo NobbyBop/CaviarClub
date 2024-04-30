@@ -10,6 +10,16 @@
 	--brown: #c29a76;
 }
 
+#nameofsite {
+	font-family: "Brush Script MT", cursive;
+	font-size:larger;
+	font-weight: bolder;
+	color: var(--orange);
+	text-decoration: underline;
+	text-decoration-color: var(--gray);
+	text-decoration-style: wavy;
+}
+
 body {
 	background-color: var(--gray);
 	margin: 0;
