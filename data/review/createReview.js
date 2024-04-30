@@ -49,6 +49,7 @@ export const createReview = async (
 		title: title,
 		content: content,
 		comments: [],
+		likes: [],
 	};
 
 	//Average rating update for dish being reviewed
