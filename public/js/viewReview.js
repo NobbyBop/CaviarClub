@@ -9,7 +9,7 @@ $(document).ready(() => {
 				},
 				success: (res) => {
 					if (res.success) {
-						$("#numLikes").text(`Number of Likes: ${res.newLikes}`);
+						$("#numLikes").text(`Number of likes: ${res.newLikes}`);
 						$("#likeButton").removeClass("liked");
 					} else {
 						alert(res.message);
@@ -25,7 +25,7 @@ $(document).ready(() => {
 				},
 				success: (res) => {
 					if (res.success) {
-						$("#numLikes").text(`Number of Likes: ${res.newLikes}`);
+						$("#numLikes").text(`Number of likes: ${res.newLikes}`);
 						$("#likeButton").addClass("liked");
 					} else {
 						alert(res.message);
