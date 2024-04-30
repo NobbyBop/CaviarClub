@@ -30,19 +30,22 @@ router.route("/").get(async (req, res) => {
   if (req.query.dishId) req.session.dishId = req.query.dishId;
 
   console.log(req.session.dishId, req.session.restaurantId);
+  res.render("create/review", { title: "Create Review", username, userId });
+});
 
-  return res.sendStatus(200);
-});
-router.route("/new").get(async (req, res) => {});
-router.route("/").get(async (req, res) => {
-  res.render("create/review", { title: "Create Review" });
-});
 router.route("/new").post(async (req, res) => {
+  let username, userId;
+  if (req.session && req.session.user) {
+    username = req.session.user.username;
+    userId = req.session.user.userId;
+  }
+  console.log(req.body);
+
   let review = req.body;
-  let tags;
+  let tags = [];
   //type checking
   try {
-    checkRating(review.actualRating);
+    checkRating(parseFloat(review.rating));
     review.content = checkString(review.content);
     review.title = checkString(review.title);
     req.session.dishId = checkId(req.session.dishId);
@@ -52,6 +55,8 @@ router.route("/new").post(async (req, res) => {
       title: "Create Review",
       error: e,
       prevSub: review,
+      username,
+      userId,
     });
   }
   //tag checking- a tag will not be added if it's an empty string but will be added otherwise
@@ -80,7 +85,7 @@ router.route("/new").post(async (req, res) => {
       req.session.user.userId,
       review.image,
       review.title,
-      review.rating,
+      parseFloat(review.rating),
       tags,
       review.content
     );
@@ -88,12 +93,14 @@ router.route("/new").post(async (req, res) => {
       return res
         .status(500)
         .render("error", { title: "Error", error: "Internal Server Error." });
-    res.render(`view/review/${newReview._id}`);
+    res.redirect(`/view/review/${newReview._id}`);
   } catch (e) {
     return res.status(400).render("create/review", {
       title: "Create Review",
       error: e,
       prevSub: review,
+      username,
+      userId,
     });
   }
 });

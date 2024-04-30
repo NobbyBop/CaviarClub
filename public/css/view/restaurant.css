@@ -26,7 +26,29 @@ ul {
 	align-items: center;
 	margin-top: 5vh;
 }
+li.dish {
+    background-color: var(--light-blue);
+    border: 1px solid var(--blue);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px var(--blue);
+    font-family: Georgia;
+    font-weight: bold;
+  }
+
+  li.dish a {
+    color: var(--orange);
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: var(--brown);
+  }
+  
+  li.dish a:hover {
+    text-decoration: underline;
+  }
 
 #dishes-label h2 {
 	margin: 0;
 }
+
