@@ -6,7 +6,10 @@ const router = Router();
 
 router.route("/:restaurantId").get(async (req, res) => {
 	let username, userId;
-	if (req.session && req.session.user) [username, userId] = req.session.user;
+	if (req.session && req.session.user) {
+		username = req.session.user.username;
+		userId = req.session.user.userId;
+	}
 
 	let restaurantId;
 	try {
