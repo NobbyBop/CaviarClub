@@ -7,7 +7,8 @@ const router = Router();
 router.route("/:reviewId").get(async (req, res) => {
 	let username, userId;
 	if (req.session && req.session.user) {
-		[username, userId] = req.session.user;
+		username = req.session.user.username;
+		userId = req.session.user.userId;
 	}
 	let reviewId;
 	try {

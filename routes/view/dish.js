@@ -7,33 +7,36 @@ const router = Router();
 
 router.route("/:dishId").get(async (req, res) => {
 	let username, userId;
-	if (req.session && req.session.user) [username, userId] = req.session.user;
+	if (req.session && req.session.user) {
+		username = req.session.user.username;
+		userId = req.session.user.userId;
+	}
 	let dishId;
 	try {
 		dishId = checkId(req.params.dishId);
 	} catch ({ message }) {
-		return res.render("error", { message, username: name });
+		return res.render("error", { message, username });
 	}
 
 	let dish;
 	try {
 		dish = await getDishFromId(dishId);
 	} catch ({ message }) {
-		return res.render("error", { message, username: name });
+		return res.render("error", { message, username });
 	}
 
 	let restaurant;
 	try {
 		restaurant = await getRestaurantFromDishId(dishId);
 	} catch ({ message }) {
-		return res.render("error", { message, username: name });
+		return res.render("error", { message, username });
 	}
 
 	let reviews;
 	try {
 		reviews = await getReviewsFromDishId(dishId);
 	} catch ({ message }) {
-		return res.render("error", { message, username: name });
+		return res.render("error", { message, username });
 	}
 
 	reviews.map((review) => {

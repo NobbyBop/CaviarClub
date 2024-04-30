@@ -31,7 +31,13 @@ app.use("/", (req, res, next) => {
 app.use("/auth", (req, res, next) => {
 	if ((req.path == "/login" || req.path == "/signup") && req.session.user)
 		return res.redirect("/home");
-	if (req.path == "/logout" && !req.session.user) return res.redirect("/home");
+	if (req.path == "/logout" && (!req.session || !req.session.user))
+		return res.redirect("/home");
+	next();
+});
+
+app.use("/create", (req, res, next) => {
+	if (!req.session || !req.session.user) return res.redirect("/home");
 	next();
 });
 
