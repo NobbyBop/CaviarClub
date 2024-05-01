@@ -61,9 +61,14 @@ when db functions are created, put the schema used here. If you need to update t
    ],
    content: string,
    comments: [
-      userId: ObjectId(),
-      username: string,       //new
-		comment: string,
+      {
+         userId: ObjectId(),
+         username: string,       //new
+		   comment: string,
+      }
    ],
+   likes: [
+      string
+   ]
 }
 ```

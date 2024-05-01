@@ -4,6 +4,7 @@ import { createRestaurant } from "./data/restaurant/createRestaurant.js";
 import { createReview } from "./data/review/createReview.js";
 import { createUser } from "./data/user/createUser.js";
 import { dbConnection, closeConnection } from "./config/mongoConnection.js";
+import { addLike } from "./data/review/addLike.js";
 
 let connect = await dbConnection();
 await connect.dropDatabase();
@@ -97,6 +98,9 @@ for (let i = 0; i < 10; i++) {
 		users[(i + 2) % users.length]._id.toString(),
 		_id.toString()
 	);
+	for (let j = 0; j < i % users.length; j++) {
+		addLike(_id.toString(), users[j]._id.toString());
+	}
 }
 
 console.log("Database seeded successfully.");

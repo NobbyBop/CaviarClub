@@ -117,3 +117,7 @@ h2 {
 	padding: 0;
 	margin: 0;
 }
+
+.liked {
+	background-color: red;
+}
