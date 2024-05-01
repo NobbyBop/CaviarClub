@@ -5,6 +5,7 @@ import { createReview } from "./data/review/createReview.js";
 import { createUser } from "./data/user/createUser.js";
 import { dbConnection, closeConnection } from "./config/mongoConnection.js";
 import { addLike } from "./data/review/addLike.js";
+import fs from 'fs'
 
 let connect = await dbConnection();
 await connect.dropDatabase();
@@ -77,12 +78,16 @@ const reviewData = [
 ];
 
 // Create sample reviews
-
+function encodeImage(filePath) {
+	const imageData = fs.readFileSync(filePath);
+	return imageData.toString('base64');
+  }
+  
 for (let i = 0; i < 10; i++) {
 	const { _id } = await createReview(
 		dishes[i % dishes.length]._id.toString(),
 		users[i % users.length]._id.toString(), // Cycle through users
-		null, //picture
+		encodeImage(`images/${Math.floor(Math.random() * 6) + 1}.png`), //picture
 		reviewData[i % reviewData.length].title,
 		reviewData[i % reviewData.length].rating, // Random rating from 1 to 5
 		reviewData[i % reviewData.length].tags, // Up to 3 random tags
