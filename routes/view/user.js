@@ -5,17 +5,16 @@ import { getReviewsFromUser } from "../../data/review/getReviewsFromUser.js";
 const router = Router();
 
 router.get("/:userId", async (req, res) => {
-	let name = undefined;
-	let userId;
+	let userId, username;
 	if (req.session && req.session.user) {
-		name = req.session.user.username;
+		username = req.session.user.username;
 		userId = req.session.user.userId;
 	}
 	try {
-		const userId = req.params.userId;
-		const user = await getUserFromId(userId);
-		const reviews = await getReviewsFromUser(userId);
-		return res.render("view/user", { user, reviews, username: name, userId });
+		const viewUserId = req.params.userId;
+		const user = await getUserFromId(viewUserId);
+		const reviews = await getReviewsFromUser(viewUserId);
+		return res.render("view/user", { user, reviews, username, userId });
 	} catch (error) {
 		res.status(500).send(error.message);
 	}

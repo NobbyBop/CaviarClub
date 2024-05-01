@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="/public/css/create/review.css" />
+<!--https://stackoverflow.com/questions/10004723/html5-input-type-range-show-range-value-->
+<div id="errors">
+	{{#if error}}
+		<p class="error">{{error}}</p>
+	{{/if}}
+</div>
+<form action="new" method="POST" name="create-review-form" id="create-review-form">
+    <label for="title">Review title:
+		<input
+			type="text"
+			name="title"
+			id="title"
+            value="{{prevSub.title}}"
+		/>
+	</label> <br>
+    <label for="rating">Rating:</label> <br>
+    <input
+			type="range"
+            min="0" max="5" step=".1" oninput="this.nextElementSibling.value = this.value"
+            
+			name="rating"
+			id="rating"
+			value="{{prevSub.rating}}"
+		/>
+        <input id="actualRating" readonly value="{{prevSub.rating}}"></input>
+    <p id="tagP">Optional tags:</p>
+    <input type="text" name="tag1" id="tag1" class="tags" value="{{prevSub.tag1}}"/>
+    <input type="text" name="tag2" id="tag2" class="tags" value="{{prevSub.tag2}}"/>
+    <input type="text" name="tag3" id="tag3" class="tags" value="{{prevSub.tag3}}"/>
+    <br>
+    <label for="content">Review:
+		<input
+			type="text"
+			name="content"
+			id="content"
+            value="{{prevSub.content}}"
+		/>
+	</label> <br>
+    <label for="image">Select photo:
+        <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+            value="{{prevSub.value}}"
+        />
+    </label> <br>
+    <button type="submit" name="submitButton" id="submitButton">Leave a review!</button>
+</form>
