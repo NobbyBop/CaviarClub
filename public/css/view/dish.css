@@ -82,3 +82,8 @@ h1 a {
 .item p {
 	margin-bottom: 10px;
 }
+
+.pic{
+	width: 200px; 
+  	height: 200px; 
+}

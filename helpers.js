@@ -108,19 +108,18 @@ export const checkPass = (str) => {
 };
 
 export const checkImage = (str) => {
-  //Pictures are allowed to not exist, or not be provided into the function.
-  if(str === undefined) return undefined
-  if(typeof str !== "string") throw new Error("Image must be represented as a string.")
-  str = str.trim()
-  //If the picture doens't exist, that is fine.
-  if(str.length === 0) return undefined
-
-  try{
-    const binaryData = atob(str)
-    if(!binaryData.startsWith('\x89PNG\r\n\x1a\n')) throw new Error("Image is not a valid PNG base64 string!")
-    return str
-  } catch(e) {
-    throw new Error("Failed to decode image!")
+  // Pictures are allowed to not exist, or not be provided into the function.
+  if (str === undefined) return undefined;
+  if (typeof str !== "string") throw new Error("Image must be represented as a string.");
+  str = str.trim();
+  // If the picture doesn't exist, that is fine.
+  if (str.length === 0) return undefined;
+  try {
+      const binaryData = atob(str);
+      if (!binaryData.startsWith('\x89PNG\r\n\x1a\n')) throw new Error("Image must be a PNG!");
+      return str;
+  } catch (e) {
+      throw new Error("Image must be a PNG!");
   }
 
 }
