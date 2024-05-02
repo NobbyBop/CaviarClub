@@ -4,6 +4,7 @@ import {
 	checkString,
 	checkTags,
 	createDateString,
+	checkImage
 } from "../../helpers.js";
 import { reviews, restaurants } from "../../config/mongoCollections.js";
 import { getDishFromId } from "../dish/getDishFromId.js";
@@ -22,7 +23,10 @@ export const createReview = async (
 ) => {
 	dishId = checkId(dishId);
 	userId = checkId(userId);
+
 	// need picture validation
+	picture = checkImage(picture)
+
 	title = checkString(title);
 	checkRating(rating);
 	content = checkString(content);

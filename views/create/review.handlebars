@@ -42,9 +42,12 @@
             type="file"
             id="image"
             name="image"
-            accept="image/*"
+            accept="image/png"
             value="{{prevSub.value}}"
         />
     </label> <br>
+    <input type="hidden" name="imageBase64" id="imageBase64">
     <button type="submit" name="submitButton" id="submitButton">Leave a review!</button>
 </form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src='/public/js/createReview.js'></script>

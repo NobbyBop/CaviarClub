@@ -84,10 +84,12 @@ function encodeImage(filePath) {
   }
   
 for (let i = 0; i < 10; i++) {
+	let image = encodeImage(`images/${Math.floor(Math.random() * 6) + 1}.png`)
+	console.log(image.substring(0,100))
 	const { _id } = await createReview(
 		dishes[i % dishes.length]._id.toString(),
 		users[i % users.length]._id.toString(), // Cycle through users
-		encodeImage(`images/${Math.floor(Math.random() * 6) + 1}.png`), //picture
+		image, //picture
 		reviewData[i % reviewData.length].title,
 		reviewData[i % reviewData.length].rating, // Random rating from 1 to 5
 		reviewData[i % reviewData.length].tags, // Up to 3 random tags
