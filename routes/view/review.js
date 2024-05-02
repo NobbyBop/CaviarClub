@@ -98,6 +98,9 @@ router
         else if (req.body.comment) {
             try {
                 await createComment(req.params.reviewId, userId, req.body.comment);
+
+               //to respond to an ajax request u will need to send a json, there should be a way to refresh the review page in the clientside js
+
                 res.redirect(`/view/review/${req.params.reviewId}`); // Redirect back to the review page
             } catch (error) {
                 res.render("error", { message: error.message, username, userId });

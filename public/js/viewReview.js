@@ -34,4 +34,24 @@ $(document).ready(() => {
 			});
 		}
 	});
+	$("#commentFrom").submit((e) => {
+		e.preventDefault();
+
+		// extract the data from the form
+
+		$.ajax({
+			method: "post",
+			dataType: "json",
+			data: {
+				comment: "", //this is where u put the comment the user submitted
+			},
+			success: (res) => {
+				if (res.success) {
+					// refresh page so comment shows up
+				} else {
+					alert(res.message);
+				}
+			},
+		});
+	});
 });
