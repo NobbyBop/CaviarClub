@@ -85,7 +85,7 @@ function encodeImage(filePath) {
   
 for (let i = 0; i < 10; i++) {
 	let image = encodeImage(`images/${Math.floor(Math.random() * 6) + 1}.png`)
-	console.log(image.substring(0,100))
+	// console.log(image.substring(0,100))
 	const { _id } = await createReview(
 		dishes[i % dishes.length]._id.toString(),
 		users[i % users.length]._id.toString(), // Cycle through users
