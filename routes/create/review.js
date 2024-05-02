@@ -28,8 +28,6 @@ router.route("/").get(async (req, res) => {
     });
 
   if (req.query.dishId) req.session.dishId = req.query.dishId;
-
-  console.log(req.session.dishId, req.session.restaurantId);
   res.render("create/review", { title: "Create Review", username, userId });
 });
 
@@ -39,7 +37,6 @@ router.route("/new").post(async (req, res) => {
     username = req.session.user.username;
     userId = req.session.user.userId;
   }
-  console.log(req.body);
 
   let review = req.body;
   let tags = [];
