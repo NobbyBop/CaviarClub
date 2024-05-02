@@ -44,15 +44,18 @@
 	<ul id="comments">
 		{{#each review.comments}}
 			<li class="comment-item">
-				<a
-					class="username"
-					id="comment-user"
-					href="/view/user/{{this.userId}}"
-				>{{this.username}}</a>
+				<a class="username" id="comment-user" href="/view/user/{{this.userId}}">{{this.username}}</a>
 				<p>{{this.comment}}</p>
 			</li>
 		{{/each}}
 	</ul>
+	{{#if userId}} <!-- Only show if user is logged in -->
+	<form id="commentForm">
+		<input type="hidden" name="reviewId" value="{{review._id}}">
+		<textarea name="comment" required placeholder="Write your comment here..."></textarea>
+		<button type="submit">Submit Comment</button>
+	</form>
+	{{/if}}
 </div>
 <script
 	src="https://code.jquery.com/jquery-3.7.1.js"

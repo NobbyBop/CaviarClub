@@ -3,26 +3,29 @@ import { checkId, checkString } from "../../helpers.js";
 import { ObjectId } from "mongodb";
 import { getUserFromId } from "../user/getUserFromId.js";
 
-export const createComment = async (comment, userId, reviewId) => {
-	comment = checkString(comment);
-	userId = checkId(userId);
-	reviewId = checkId(reviewId);
+export const createComment = async (reviewId, userId, comment) => {
+    comment = checkString(comment);
+    userId = checkId(userId);
+    reviewId = checkId(reviewId);
 
-	const user = await getUserFromId(userId);
+    const user = await getUserFromId(userId);
 
-	const newComment = {
-		userId: new ObjectId(userId),
-		username: user.username,
-		comment: comment,
-	};
+    const newComment = {
+        userId: new ObjectId(userId),
+        username: user.username,
+        comment: comment,
+        timestamp: new Date()  // Optional: add timestamp to the comment
+    };
 
-	const reviewCollection = await reviews();
-	const returnValue = await reviewCollection.findOneAndUpdate(
-		{ _id: new ObjectId(reviewId) },
-		{ $push: { comments: newComment } }
-	);
+    const reviewCollection = await reviews();
+    const returnValue = await reviewCollection.findOneAndUpdate(
+        { _id: new ObjectId(reviewId) },
+        { $push: { comments: newComment } },
+        { returnDocument: 'after' }  // Ensures it returns the updated document
+    );
 
-	if (!returnValue) throw new Error("Error: Comment could not be added");
+    if (!returnValue.value) throw new Error("Error: Comment could not be added");
 
-	return newComment;
+    return newComment;
 };
+
