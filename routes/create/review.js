@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { checkId, checkRating, checkString } from "../../helpers.js";
+import { checkId, checkImage, checkRating, checkString } from "../../helpers.js";
 import { createReview } from "../../data/review/createReview.js";
 const router = Router();
 
@@ -28,8 +28,6 @@ router.route("/").get(async (req, res) => {
     });
 
   if (req.query.dishId) req.session.dishId = req.query.dishId;
-
-  console.log(req.session.dishId, req.session.restaurantId);
   res.render("create/review", { title: "Create Review", username, userId });
 });
 
@@ -39,7 +37,6 @@ router.route("/new").post(async (req, res) => {
     username = req.session.user.username;
     userId = req.session.user.userId;
   }
-  console.log(req.body);
 
   let review = req.body;
   let tags = [];
@@ -80,10 +77,19 @@ router.route("/new").post(async (req, res) => {
   }
 
   try {
+    review.imageBase64 = checkImage(review.imageBase64);
+  } catch (e) {
+    return res.status(500).render("error", {
+      message: "Incompatible image type!",
+      username,
+      userId,
+    })
+  }
+  try {
     let newReview = await createReview(
       req.session.dishId,
       req.session.user.userId,
-      review.image,
+      review.imageBase64,
       review.title,
       parseFloat(review.rating),
       tags,

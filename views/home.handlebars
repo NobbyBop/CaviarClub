@@ -6,6 +6,7 @@
 </div>
 <article>
     <h1 id="title">Home</h1>
+    <div class="errors"></div>
     <form id="sortForm" action="/home" method="POST">
         <label for="sort">Sort by:
             <select id="sort" name="sort">
@@ -19,7 +20,7 @@
     <ul id="reviewList">
     {{#each reviews}}
         <li class="review">
-            <a href="/view/review/{{this._id}}">[PICTURE HERE] {{this.title}}</a><br>
+            <a href="/view/review/{{this._id}}"><img src="data:image/png;base64,{{this.picture}}" class="thumbnail"> <br> {{this.title}}</a><br>
             Rating: {{this.rating}}<br>
             Posted: {{this.date}}<br>
             A review of: <a href="/view/dish/{{this.dishId}}">{{this.dishName}}</a><br>
@@ -29,3 +30,5 @@
     {{/each}}
     </ul>
 </article>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src='/public/js/home.js'></script>

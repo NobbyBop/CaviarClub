@@ -1,4 +1,9 @@
-/* Comment */
+
+.thumbnail{
+  width: 200px; 
+  height: 200px; 
+  /* transform: scale(0.5); */
+}
 
 #errormsgs {
 	position: relative;

@@ -10,7 +10,7 @@
 		{{#each dishReviews}}
 			<li id="item" class="item">
 				<a id="picTitle" href="/view/review/{{this._id}}">
-					<h4 class="pic">{{this.picture}}</h4>
+					<img src="data:image/png;base64,{{this.picture}}" class="pic"><br>
 					<h4 class="reviewTitle">{{this.title}}</h4>
 
 					<p class="DateRate">Date: {{this.date}}</p>

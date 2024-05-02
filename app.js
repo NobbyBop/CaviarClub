@@ -3,6 +3,7 @@ const app = express();
 import configRoutes from "./routes/index.js";
 import exphbs from "express-handlebars";
 import session from "express-session";
+import bodyParser from 'body-parser';
 
 app.use(
 	session({
@@ -14,7 +15,8 @@ app.use(
 );
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
