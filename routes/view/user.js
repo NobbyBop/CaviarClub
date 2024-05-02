@@ -5,6 +5,7 @@ import { getReviewsFromUser } from "../../data/review/getReviewsFromUser.js";
 const router = Router();
 
 router.get("/:userId", async (req, res) => {
+	console.log('hi');
 	let userId, username;
 	if (req.session && req.session.user) {
 		username = req.session.user.username;
