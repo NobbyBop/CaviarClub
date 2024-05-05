@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { checkId, checkImage, checkRating, checkString } from "../../helpers.js";
 import { createReview } from "../../data/review/createReview.js";
+import { getReviewsFromUser } from "../../data/review/getReviewsFromUser.js";
+
 const router = Router();
 
 router.route("/").get(async (req, res) => {
@@ -99,6 +101,10 @@ router.route("/new").post(async (req, res) => {
       return res
         .status(500)
         .render("error", { title: "Error", error: "Internal Server Error." });
+    
+    let userReviews = await getReviewsFromUser(String(userId))
+    req.session.user.reviewCount = userReviews.length
+    
     res.redirect(`/view/review/${newReview._id}`);
   } catch (e) {
     return res.status(400).render("create/review", {

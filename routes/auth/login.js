@@ -35,7 +35,7 @@ router
 				username: result.username,
 				userId: result._id,
 				admin: result.admin,
-				reviewCount
+				reviewCount:49
 			};
 
 			return res.redirect("/home");
