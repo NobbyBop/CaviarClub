@@ -55,7 +55,7 @@ router.route("/").post(async (req, res) => {
 		return res.render("error", { message, username, userId, isAdmin });
 	}
 
-	return res.redirect("/view/restaurant/" + restaurantId);
+	return res.redirect("/view/dish/" + dishId);
 });
 
 export default router;
