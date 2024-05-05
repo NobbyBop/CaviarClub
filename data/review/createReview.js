@@ -4,7 +4,7 @@ import {
 	checkString,
 	checkTags,
 	createDateString,
-	checkImage
+	checkImage,
 } from "../../helpers.js";
 import { reviews, restaurants } from "../../config/mongoCollections.js";
 import { getDishFromId } from "../dish/getDishFromId.js";
@@ -25,7 +25,7 @@ export const createReview = async (
 	userId = checkId(userId);
 
 	// need picture validation
-	picture = checkImage(picture)
+	picture = checkImage(picture);
 
 	title = checkString(title);
 	checkRating(rating);
@@ -41,7 +41,6 @@ export const createReview = async (
 	let dateString = createDateString(currentDay);
 
 	const newReview = {
-		_id: new ObjectId(),
 		dishId: new ObjectId(dishId),
 		dishname: dish.name,
 		userId: new ObjectId(userId),
@@ -72,10 +71,13 @@ export const createReview = async (
 	);
 
 	const reviewCollection = await reviews();
-	const insertInfo = await reviewCollection.insertOne(newReview);
+	const insertedReview = await reviewCollection.findOneAndUpdate(
+		{ userId: new ObjectId(userId), dishId: new ObjectId(dishId) },
+		{ $set: { ...newReview } },
+		{ upsert: true, returnDocument: "after" }
+	);
 
-	if (!insertInfo.acknowledged || !insertInfo.insertedId)
-		throw new Error("Could not add review");
+	if (!insertedReview) throw new Error("Could not add review");
 
-	return newReview;
+	return insertedReview;
 };

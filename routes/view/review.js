@@ -1,9 +1,10 @@
-import { Router, response } from "express";
+import { Router } from "express";
 import { getReviewFromId } from "../../data/review/getReviewFromId.js";
 import { checkId } from "../../helpers.js";
 import { getRestaurantFromDishId } from "../../data/restaurant/getRestaurantFromDishId.js";
 import { addLike } from "../../data/review/addLike.js";
 import { removeLike } from "../../data/review/removeLike.js";
+import { createComment } from "../../data/comment/createComment.js";
 const router = Router();
 
 router
@@ -42,8 +43,6 @@ router
 			return res.render("error", { message, username, userId });
 		}
 
-		//this seems so dumb... we should probably do this in the data functions
-		//why would we ever need an id that isnt a string?
 		review._id = review._id.toString();
 		review.dishId = review.dishId.toString();
 		review.userId = review.userId.toString();
@@ -93,6 +92,18 @@ router
 				return res.json({
 					success: true,
 					newLikes: newObj.likes.length,
+				});
+			}
+		} else if (req.body.comment) {
+			// Handle comment creation
+			try {
+				await createComment(req.body.comment, userId, req.params.reviewId);
+				return res.redirect(`/view/review/${req.params.reviewId}`);
+			} catch (error) {
+				return res.render("error", {
+					message: error.message,
+					username,
+					userId,
 				});
 			}
 		}

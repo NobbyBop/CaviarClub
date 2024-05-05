@@ -55,6 +55,11 @@ $('#signup-form').submit((event) => {
         err_count++
         $('#errors').append(`<p>${e}</p>`)
     }
+
+    if (!$('#ageCheckbox').prop('checked')){
+        err_count++
+        $('#errors').append(`<p>You must be at least 13 years old to register!</p>`)
+    }
     
 
     if(err_count > 0){
