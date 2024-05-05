@@ -57,7 +57,7 @@ export const createReview = async (
 
 	//Average rating update for dish being reviewed
 	const ratingToUpdate = dish;
-	const reviewsByDish = await getReviewsFromDishId(dishId);
+	let reviewsByDish = await getReviewsFromDishId(dishId);
 
 	const pre = reviewsByDish.length * ratingToUpdate.averageRating;
 	//average review can have at most 2 decimal places
@@ -78,6 +78,18 @@ export const createReview = async (
 	);
 
 	if (!insertedReview) throw new Error("Could not add review");
+
+	reviewsByDish = await getReviewsFromDishId(insertedReview.dishId.toString());
+    
+	let newAverage = 0;
+	if (reviewsByDish.length !== 0) 
+		newAverage = reviewsByDish.map(review => review.rating).reduce((sum, rating) => sum + rating, 0) / reviewsByDish.length;
+
+	await restaurantCollection.findOneAndUpdate(
+		{ "dishes._id": insertedReview.dishId },
+		{ $set: { "dishes.$.averageRating": newAverage } }
+	);
+
 
 	return insertedReview;
 };
