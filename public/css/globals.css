@@ -1,23 +1,23 @@
 /* SCALABILITY */
 
 form {
-	font-size: 2vh;
+	font-size: max(14px, 2vh);
 }
 
 form input {
-	font-size: 1.9vh;
+	font-size: max(14px, 1.9vh);
 }
 
 #setForm {
-font-size: 1.5vh;
+	font-size: max(14px, 1.5vh);
 }
 
 #reviewList {
-font-size: max(15px,.6vh);
+	font-size: max(15px, 0.6vh);
 }
 
 a {
-	font-size: 1.5vh;
+	font-size: max(14px, 1.5vh);
 }
 
 .badButton {
@@ -29,13 +29,12 @@ a {
 }
 
 p {
-	font-size: 1.4vh;
+	font-size: max(14px, 1.4vh);
 }
 
 #content {
-	font-size: max(12px, 0.6vh);
+	font-size: max(13px, 0.6vh);
 }
-
 
 /* END SCALABILITY */
 
@@ -53,7 +52,7 @@ p {
 
 #nameofsite {
 	font-family: "Brush Script MT", cursive;
-	font-size:larger;
+	font-size: larger;
 	font-weight: bolder;
 	color: var(--orange);
 	text-decoration: underline;
@@ -77,7 +76,7 @@ main {
 
 select {
 	font-size: 1.3vh;
-  }
+}
 
 button {
 	font-size: 1.5vh !important;
