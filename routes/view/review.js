@@ -4,20 +4,17 @@ import { checkId } from "../../helpers.js";
 import { getRestaurantFromDishId } from "../../data/restaurant/getRestaurantFromDishId.js";
 import { addLike } from "../../data/review/addLike.js";
 import { removeLike } from "../../data/review/removeLike.js";
-import { createComment } from "../../data/comment/createComment.js"; 
-
+import { createComment } from "../../data/comment/createComment.js";
 const router = Router();
 
 router
     .route("/:reviewId")
     .get(async (req, res) => {
-        let username, userId, isLoggedIn = false;
+        let username, userId;
         if (req.session && req.session.user) {
             username = req.session.user.username;
             userId = req.session.user.userId;
-            isLoggedIn = true; // User is logged in
         }
-
         let reviewId;
         try {
             reviewId = checkId(req.params.reviewId.toString());
@@ -45,7 +42,6 @@ router
             return res.render("error", { message, username, userId });
         }
 
-        // Convert MongoDB IDs to string (if using MongoDB)
         review._id = review._id.toString();
         review.dishId = review.dishId.toString();
         review.userId = review.userId.toString();
@@ -61,7 +57,6 @@ router
             likedClass: review.likes.includes(userId) ? "liked" : "",
             username,
             userId,
-            isLoggedIn, // Pass the login status to the view
         });
     })
     .post(async (req, res) => {
@@ -71,7 +66,6 @@ router
             userId = req.session.user.userId;
         }
 
-        // Handle like and dislike actions
         if (req.body.like) {
             if (req.body.like == "add") {
                 let newObj;
@@ -93,17 +87,13 @@ router
                     newLikes: newObj.likes.length,
                 });
             }
-        }
-        // Handle comment submission
-        else if (req.body.comment) {
+        } else if (req.body.comment) {
+            // Handle comment creation
             try {
-                await createComment(req.params.reviewId, userId, req.body.comment);
-
-               //to respond to an ajax request u will need to send a json, there should be a way to refresh the review page in the clientside js
-
-                res.redirect(`/view/review/${req.params.reviewId}`); // Redirect back to the review page
+                await createComment(req.body.comment, userId, req.params.reviewId);
+                return res.redirect(`/view/review/${req.params.reviewId}`);
             } catch (error) {
-                res.render("error", { message: error.message, username, userId });
+                return res.render("error", { message: error.message, username, userId });
             }
         }
     });
