@@ -1,16 +1,33 @@
 <link rel="stylesheet" href="/public/css/auth/signup.css" />
+
+<h2>Registration Requirements</h2>
+<p>
+  Username
+  Username must not already be taken by another user and must be between 5 and 10 characters.
+</p>
+<p>
+  Email:
+  Must be a valid email and containing no whitespace.
+</p>
+<p>
+  Password:
+  Must not contain any whitespace, must contain at least one uppercase letter, at least one digit, at least one special character among @$!%*?&, and must be at least 8 characters long.
+</p>
+<p>
+  Age:
+  You must be 13 years or older to create an account.
+</p>
+
+<hr>
+
 <div id="errors">
 	{{#if error}}
 		<p class="error">{{error}}</p>
 	{{/if}}
 </div>
-<p>username: username must not already be taken by another user, and must be between 5 and 10 characters.</p>
-<p>email: must be a valid email, containing no whitespace </p>
-<p>password: must not contain any whitespace, must contain at least one
-<p>password: must not contain any whitespace, must contain at least one
-	uppercase letter, at least one digit, at least one special character among
-	@$!%*?&amp;, and must be at least 8 characters long.
-</p>
+
+
+
 <form action="signup" method="POST" name="signup-form" id="signup-form">
 	<label for="username">Username
 		<input
@@ -42,9 +59,17 @@
 			value="{{prevSub.confirmPassword}}"
 		/>
 	</label>
-	<br />
+	<br>
+	<label for="ageCheckbox">
+		I certify that I am 13 years old or older:
+    	<input type="checkbox" id="ageCheckbox" name="ageCheckbox">
+	</label>
+	<br>
 	<button type="submit" name="submitButton" id="submitButton">Submit</button>
 </form>
+
+<hr>
+
 <a href="/auth/login">Already have an account? Click here to log-in.</a>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/public/js/signup.js"></script>
