@@ -1,5 +1,9 @@
 /* SCALABILITY */
 
+.reviewPic {
+	object-fit: contain;
+}
+
 form {
 	font-size: 2vh;
 }
