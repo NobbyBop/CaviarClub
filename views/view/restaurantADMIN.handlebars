@@ -10,12 +10,12 @@
             <input type="text" name="address" id="address" />
             <input type="hidden" id="restaurantId" name="restaurantId" value="{{restaurantId}}"><br>
             <input type="hidden" id="isDeleted" name="isDeleted" value="no"><br>
-            <button type="submit">Update</button>
+            <button type="submit" class="ehButton">Update</button>
         </form><br><br>
         <form action="/edit/restaurant" id="form2" method="post">
             <input type="hidden" id="restaurantId" name="restaurantId" value="{{restaurantId}}"><br>    
             <input type="hidden" id="isDeleted" name="isDeleted" value="yes"><br>
-            <button type="submit">Delete Restaurant (No Undo)!!!</button>
+            <button type="submit" class="badButton">Delete Restaurant (No Undo)!!!</button>
         </form><br><br>
 	</div>
 	<ul id="dishes">

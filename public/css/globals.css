@@ -1,3 +1,44 @@
+/* SCALABILITY */
+
+form {
+	font-size: 2vh;
+}
+
+form input {
+	font-size: 1.9vh;
+}
+
+#setForm {
+font-size: 1.5vh;
+}
+
+#reviewList {
+font-size: max(15px,.6vh);
+}
+
+a {
+	font-size: 1.5vh;
+}
+
+.badButton {
+	background-color: red;
+}
+
+.ehButton {
+	background-color: yellow;
+}
+
+p {
+	font-size: 1.4vh;
+}
+
+#content {
+	font-size: max(12px, 0.6vh);
+}
+
+
+/* END SCALABILITY */
+
 * {
 	box-sizing: border-box;
 }
@@ -30,6 +71,18 @@ main {
 	padding-right: 20%;
 }
 
+#title {
+	font-size: 1.75vh;
+}
+
+select {
+	font-size: 1.3vh;
+  }
+
+button {
+	font-size: 1.5vh !important;
+}
+
 nav {
 	background-color: var(--blue);
 	width: 100%;
@@ -41,6 +94,7 @@ nav {
 	padding-right: 5%;
 	padding-top: 20px;
 	padding-bottom: 20px;
+	font-size: 2.2vh;
 }
 
 nav div {
