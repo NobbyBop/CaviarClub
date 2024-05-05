@@ -3,7 +3,7 @@ const app = express();
 import configRoutes from "./routes/index.js";
 import exphbs from "express-handlebars";
 import session from "express-session";
-import bodyParser from 'body-parser';
+import bodyParser from "body-parser";
 
 app.use(
 	session({
@@ -15,8 +15,8 @@ app.use(
 );
 
 app.use(express.json());
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
@@ -34,6 +34,12 @@ app.use("/auth", (req, res, next) => {
 	if ((req.path == "/login" || req.path == "/signup") && req.session.user)
 		return res.redirect("/home");
 	if (req.path == "/logout" && (!req.session || !req.session.user))
+		return res.redirect("/home");
+	next();
+});
+
+app.use('/edit', (req, res, next) => {
+	if ((req.path == "/restaurant" || req.path == "/review") && (!req.session.user || !req.session.user.admin))
 		return res.redirect("/home");
 	next();
 });

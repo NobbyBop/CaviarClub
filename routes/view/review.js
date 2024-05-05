@@ -8,63 +8,70 @@ import { createComment } from "../../data/comment/createComment.js";
 const router = Router();
 
 router
-    .route("/:reviewId")
-    .get(async (req, res) => {
-        let username, userId;
-        if (req.session && req.session.user) {
-            username = req.session.user.username;
-            userId = req.session.user.userId;
-        }
-        let reviewId;
-        try {
-            reviewId = checkId(req.params.reviewId.toString());
-        } catch ({ message }) {
-            return res.render("error", { message, username, userId });
-        }
+	.route("/:reviewId")
+	.get(async (req, res) => {
+		let username, userId, isAdmin;
+		if (req.session && req.session.user) {
+			username = req.session.user.username;
+			userId = req.session.user.userId;
+			isAdmin = req.session.user.admin;
+		}
+		let reviewId;
+		try {
+			reviewId = checkId(req.params.reviewId.toString());
+		} catch ({ message }) {
+			return res.render("error", { message, username, userId });
+		}
 
-        let review;
-        try {
-            review = await getReviewFromId(reviewId);
-        } catch ({ message }) {
-            return res.render("error", { message, username, userId });
-        }
+		let review;
+		try {
+			review = await getReviewFromId(reviewId);
+		} catch ({ message }) {
+			return res.render("error", { message, username, userId });
+		}
 
-        let dishId;
-        try {
-            dishId = checkId(review.dishId.toString());
-        } catch ({ message }) {
-            return res.render("error", { message, username, userId });
-        }
-        let restaurant;
-        try {
-            restaurant = await getRestaurantFromDishId(dishId);
-        } catch ({ message }) {
-            return res.render("error", { message, username, userId });
-        }
+		let dishId;
+		try {
+			dishId = checkId(review.dishId.toString());
+		} catch ({ message }) {
+			return res.render("error", { message, username, userId });
+		}
+		let restaurant;
+		try {
+			restaurant = await getRestaurantFromDishId(dishId);
+		} catch ({ message }) {
+			return res.render("error", { message, username, userId });
+		}
 
-        review._id = review._id.toString();
-        review.dishId = review.dishId.toString();
-        review.userId = review.userId.toString();
-        restaurant._id = restaurant._id.toString();
-        for (const i in review.comments) {
-            review.comments[i].userId = review.comments[i].userId.toString();
-        }
+		review._id = review._id.toString();
+		review.dishId = review.dishId.toString();
+		review.userId = review.userId.toString();
+		restaurant._id = restaurant._id.toString();
+		for (const i in review.comments) {
+			review.comments[i].userId = review.comments[i].userId.toString();
+		}
 
-        return res.render("view/review", {
-            title: `${review.dishname}: Review`,
-            review,
-            restaurant,
-            likedClass: review.likes.includes(userId) ? "liked" : "",
-            username,
-            userId,
-        });
-    })
-    .post(async (req, res) => {
-        let username, userId;
-        if (req.session && req.session.user) {
-            username = req.session.user.username;
-            userId = req.session.user.userId;
-        }
+		let title = isAdmin
+			? `ADMIN: ${review.dishname} | Review`
+			: `${review.dishname} | Review`;
+
+		return res.render("view/review", {
+			title: title,
+			admin: isAdmin,
+			reviewId,
+			review,
+			restaurant,
+			likedClass: review.likes.includes(userId) ? "liked" : "",
+			username,
+			userId,
+		});
+	})
+	.post(async (req, res) => {
+		let username, userId;
+		if (req.session && req.session.user) {
+			username = req.session.user.username;
+			userId = req.session.user.userId;
+		}
 
         if (req.body.like) {
             if (req.body.like == "add") {

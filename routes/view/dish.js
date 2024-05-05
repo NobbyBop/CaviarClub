@@ -6,10 +6,11 @@ import { getReviewsFromDishId } from "../../data/review/getReviewsFromDishId.js"
 const router = Router();
 
 router.route("/:dishId").get(async (req, res) => {
-	let username, userId;
+	let username, userId, isAdmin;
 	if (req.session && req.session.user) {
 		username = req.session.user.username;
 		userId = req.session.user.userId;
+		isAdmin = req.session.user.admin;
 	}
 	let dishId;
 	try {
@@ -52,6 +53,7 @@ router.route("/:dishId").get(async (req, res) => {
 		dishId: dish._id,
 		username,
 		userId,
+		admin: isAdmin,
 	});
 });
 

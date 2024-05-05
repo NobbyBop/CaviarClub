@@ -5,25 +5,58 @@
 		from
 		<a href="/view/restaurant/{{restaurantId}}">{{restaurantName}}</a></h1>
 	<h2>Average Rating: {{averageRating}} out of 5</h2>
+	{{#if admin}}
+		<form action="/edit/dish" id="form1" method="post">
+			<label for="name">Dish Name (leave blank if no change)</label>
+			<input type="text" name="name" id="name" />
+			<br />
+			<input
+				type="hidden"
+				id="restaurantId"
+				name="restaurantId"
+				value="{{restaurantId}}"
+			/><br />
+			<input type="hidden" id="dishId" name="dishId" value="{{dishId}}" /><br />
+			<input type="hidden" id="deleteDish" name="deleteDish" value="no" /><br />
+			<button type="submit" class="ehButton">Update</button>
+		</form><br /><br />
+		<form action="/edit/dish" id="form2" method="post">
+			<input
+				type="hidden"
+				id="restaurantId"
+				name="restaurantId"
+				value="{{restaurantId}}"
+			/><br />
+			<input type="hidden" id="dishId" name="dishId" value="{{dishId}}" /><br />
+			<input type="hidden" id="deleteDish" name="deleteDish" value="yes" /><br
+			/>
+			<button type="submit" class="badButton">Delete Dish (No Undo)!!!</button>
+		</form><br /><br />
+	{{/if}}
 	<h3>Reviews:</h3>
 	<ul id="reviews">
-		{{#each dishReviews}}
-			<li id="item" class="item">
-				<a id="picTitle" href="/view/review/{{this._id}}">
-					<img src="data:image/png;base64,{{this.picture}}" class="pic"><br>
-					<h4 class="reviewTitle">{{this.title}}</h4>
+		{{#if dishReviews.length}}
+			{{#each dishReviews}}
+				<li id="item" class="item">
+					<a id="picTitle" href="/view/review/{{this._id}}">
+						<img src="data:image/png;base64,{{this.picture}}" class="pic" /><br
+						/>
+						<h4 class="reviewTitle">{{this.title}}</h4>
 
-					<p class="DateRate">Date: {{this.date}}</p>
-					<p class="DateRate">Rating: {{this.rating}} out of 5</p>
-					<ul class="tags" id="Tag">
-						<h4 id="Tags">Tags:</h4>
-						{{#each this.tags}}
-							<li class="tag" id="Tags">{{this}}</li>
-						{{/each}}
-					</ul>
-					<p>{{this.content}}</p>
-				</a>
-			</li>
-		{{/each}}
+						<p class="DateRate">Date: {{this.date}}</p>
+						<p class="DateRate">Rating: {{this.rating}} out of 5</p>
+						<ul class="tags" id="Tag">
+							<h4 id="Tags">Tags:</h4>
+							{{#each this.tags}}
+								<li class="tag" id="Tags">{{this}}</li>
+							{{/each}}
+						</ul>
+						<p>{{this.content}}</p>
+					</a>
+				</li>
+			{{/each}}
+		{{else}}
+			<div>None</div>
+		{{/if}}
 	</ul>
 </div>

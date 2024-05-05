@@ -19,10 +19,20 @@ for (let i = 0; i < 10; i++) {
 			`user${i}@example.com`,
 			`user${i}`,
 			`P@ssword${i}`,
-			i % 2 === 0 // Alternate between admin and regular user
+			false
 		)
 	);
 }
+
+// Create single admin user
+users.push(
+	await createUser(
+		'admin_e1@caviar.com',
+		'admin_u1',
+		'123@adminPassword@123',
+		true
+	)
+);
 
 // Create sample restaurants and dishes
 const restaurantsData = [

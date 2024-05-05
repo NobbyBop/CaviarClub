@@ -1,6 +1,24 @@
 <link rel="stylesheet" href="/public/css/view/review.css" />
 <div id="container">
-	<img src="data:image/png;base64,{{review.picture}}" alt="{{review.title}}" />
+	<img class="reviewPic" src="data:image/png;base64,{{review.picture}}" alt="{{review.title}}" />
+
+	<div id="errors">
+		<p class="error">{{error}}</p>
+	</div>
+
+
+	{{#if admin}}
+		<form action="/edit/review" id="reviewFormDelete" method="post">
+			<input
+				type="hidden"
+				id="reviewId"
+				name="reviewId"
+				value="{{reviewId}}"
+			/><br />
+			<input type="hidden" id="isDeleted" name="isDeleted" value="yes" /><br />
+			<button type="submit" class="badButton">Delete Review (No Undo)!!!</button>
+		</form><br /><br />
+	{{/if}}
 	<div id="header-container">
 		<h1 id="rating">{{review.rating}} <span>out of</span> 5</h1>
 		<h1 id="dish-name">{{review.dishname}}</h1>
@@ -58,3 +76,5 @@
 	crossorigin="anonymous"
 ></script>
 <script src="/public/js/viewReview.js"></script>
+
+<script src="/public/js/editReview.js"></script>

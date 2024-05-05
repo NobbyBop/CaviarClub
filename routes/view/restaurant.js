@@ -5,10 +5,11 @@ import { getDishesFromRestaurantId } from "../../data/dish/getDishesFromRestaura
 const router = Router();
 
 router.route("/:restaurantId").get(async (req, res) => {
-	let username, userId;
+	let username, userId, isAdmin;
 	if (req.session && req.session.user) {
 		username = req.session.user.username;
 		userId = req.session.user.userId;
+		isAdmin = req.session.user.admin;
 	}
 
 	let restaurantId;
@@ -32,8 +33,14 @@ router.route("/:restaurantId").get(async (req, res) => {
 		return res.render("error", { message });
 	}
 
+	let title = isAdmin
+		? `ADMIN: ${restaurant.name} | Restaurant`
+		: `${restaurant.name} | Restaurant`;
+
 	return res.render("view/restaurant", {
-		title: `${restaurant.name} | Restaurant`,
+		title,
+		admin: isAdmin,
+		restaurantId,
 		restaurant,
 		dishes,
 		username,

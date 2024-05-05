@@ -4,6 +4,38 @@
 		<h1 id="restaurant-name">{{restaurant.name}}</h1>
 		<p id="restaurant-address">{{restaurant.address}}</p>
 	</div>
+
+	<div id="errors">
+		<p class="error">{{error}}</p>
+	</div>
+
+	{{#if admin}}
+		<form action="/edit/restaurant" id="form1" method="post">
+			<label for="name">Restaurant Name (leave blank if no change)</label>
+			<input type="text" name="name" id="name" />
+			<br />
+			<label for="address">Address (leave blank if no change)</label>
+			<input type="text" name="address" id="address" />
+			<input
+				type="hidden"
+				id="restaurantId"
+				name="restaurantId"
+				value="{{restaurantId}}"
+			/><br />
+			<input type="hidden" id="isDeleted" name="isDeleted" value="no" /><br />
+			<button type="submit" class="ehButton">Update</button>
+		</form><br /><br />
+		<form action="/edit/restaurant" id="form2" method="post">
+			<input
+				type="hidden"
+				id="restaurantId"
+				name="restaurantId"
+				value="{{restaurantId}}"
+			/><br />
+			<input type="hidden" id="isDeleted" name="isDeleted" value="yes" /><br />
+			<button type="submit" class="badButton">Delete Restaurant (No Undo)!!!</button>
+		</form><br /><br />
+	{{/if}}
 	<ul id="dishes">
 		<li id="dishes-label"><h2>Dishes:</h2></li>
 		{{#each dishes}}
@@ -17,3 +49,6 @@
 		{{/each}}
 	</ul>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/public/js/editRestaurant.js"></script>
