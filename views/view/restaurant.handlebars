@@ -4,6 +4,11 @@
 		<h1 id="restaurant-name">{{restaurant.name}}</h1>
 		<p id="restaurant-address">{{restaurant.address}}</p>
 	</div>
+
+	<div id="errors">
+		<p class="error">{{error}}</p>
+	</div>
+
 	{{#if admin}}
 		<form action="/edit/restaurant" id="form1" method="post">
 			<label for="name">Restaurant Name (leave blank if no change)</label>
@@ -44,3 +49,6 @@
 		{{/each}}
 	</ul>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/public/js/editRestaurant.js"></script>

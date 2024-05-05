@@ -10,9 +10,9 @@
     <form id="sortForm" action="/home" method="POST">
         <label for="sort">Sort by:
             <select id="sort" name="sort">
-                <option value="recent">Recent</option>
-                <option value="alphabetical">A-Z</option>
-                <option value="rating">Rating</option>
+                <option value="recent" {{#if is0}} selected {{/if}} >Recent</option>
+                <option value="alphabetical" {{#if is1}} selected {{/if}}>A-Z</option>
+                <option value="rating" {{#if is2}} selected {{/if}}>Rating</option>
             </select>
         </label>
             <button type="submit">Refresh</button>
