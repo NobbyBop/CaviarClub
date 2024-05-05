@@ -28,14 +28,13 @@ router
 					.render("error", { title: "Error", error: "Internal Server Error." });
 
 			let userReviews = await getReviewsFromUser(String(result._id))
-			let reviewCount = userReviews.length
 			
 			req.session.user = {
 				email: result.email,
 				username: result.username,
 				userId: result._id,
 				admin: result.admin,
-				reviewCount:49
+				reviewCount: userReviews.length
 			};
 
 			return res.redirect("/home");
