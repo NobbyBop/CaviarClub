@@ -39,13 +39,6 @@ router.route("/").post(async (req, res) => {
 	let result;
 
 	try {
-		console.log(
-			"🚀 ~ file: dish.js:54 ~ router.route ~ name, dishId, restaurantId, deleteDish:",
-			name,
-			dishId,
-			restaurantId,
-			deleteDish
-		);
 		if (deleteDish) {
 			result = await removeDish(dishId);
 		} else {

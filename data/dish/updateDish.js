@@ -49,8 +49,6 @@ export const updateDish = async (dishId, name) => {
 		{ $set: { dishname: name } }
 	);
 
-	console.log(updateReview);
-
 	if (!updatedInfo) throw "could not update restaurant successfully";
 	updatedInfo._id = updatedInfo._id.toString();
 	return updatedInfo;
