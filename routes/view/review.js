@@ -89,6 +89,52 @@ router
             }
         } else if (req.body.comment) {
             // Handle comment creation
+            
+            let review = await getReviewFromId(req.params.reviewId)
+            for(let c of review.comments){
+                if(String(c.userId)===req.session.user.userId){
+                    let username, userId;
+                    if (req.session && req.session.user) {
+                        username = req.session.user.username;
+                        userId = req.session.user.userId;
+                    }
+                    let reviewId;
+                    try {
+                        reviewId = checkId(req.params.reviewId.toString());
+                    } catch ({ message }) {
+                        return res.render("error", { message, username, userId });
+                    }
+
+                    let review;
+                    try {
+                        review = await getReviewFromId(reviewId);
+                    } catch ({ message }) {
+                        return res.render("error", { message, username, userId });
+                    }
+
+                    let dishId;
+                    try {
+                        dishId = checkId(review.dishId.toString());
+                    } catch ({ message }) {
+                        return res.render("error", { message, username, userId });
+                    }
+                    let restaurant;
+                    try {
+                        restaurant = await getRestaurantFromDishId(dishId);
+                    } catch ({ message }) {
+                        return res.render("error", { message, username, userId });
+                    }
+                    return res.render("view/review", {
+                        title: `${review.dishname}: Review`,
+                        review,
+                        restaurant,
+                        likedClass: review.likes.includes(userId) ? "liked" : "",
+                        username,
+                        userId,
+                        cantComment:true
+                    });
+                }
+            }
             try {
                 await createComment(req.body.comment, userId, req.params.reviewId);
                 return res.redirect(`/view/review/${req.params.reviewId}`);
