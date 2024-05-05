@@ -12,6 +12,9 @@ import viewReviewRoutes from "./view/review.js";
 import viewUserRoutes from "./view/user.js";
 import viewDishRoutes from "./view/dish.js";
 
+import editRestaurantRoutes from "./edit/restaurant.js";
+import editReviewRoutes from "./edit/review.js"
+
 import homeRoutes from "./home.js";
 
 export default (app) => {
@@ -24,6 +27,8 @@ export default (app) => {
   app.use("/create/restaurant", createRestaurantRoutes);
   app.use("/create/review", createReviewRoutes);
   app.use("/create/user", createUserRoutes);
+  app.use("/edit/restaurant", editRestaurantRoutes);
+  app.use("/edit/review", editReviewRoutes);
   app.use("/auth/login", loginRoutes);
   app.use("/auth/signup", signupRoutes);
   app.use("/auth/logout", logoutRoutes);

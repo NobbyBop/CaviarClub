@@ -9,10 +9,11 @@ const router = Router();
 router
 	.route("/:reviewId")
 	.get(async (req, res) => {
-		let username, userId;
+		let username, userId, isAdmin;
 		if (req.session && req.session.user) {
 			username = req.session.user.username;
 			userId = req.session.user.userId;
+			isAdmin = req.session.user.admin
 		}
 		let reviewId;
 		try {
@@ -51,8 +52,12 @@ router
 			review.comments[i].userId = review.comments[i].userId.toString();
 		}
 
-		return res.render("view/review", {
-			title: `${review.dishname}: Review`,
+		let urlLocation = isAdmin ? 'view/reviewADMIN' : 'view/review';
+		let title = isAdmin ? `ADMIN: ${review.dishname} | Review` : `${review.dishname} | Review`;	
+		
+		return res.render(urlLocation, {
+			title: title,
+			reviewId,
 			review,
 			restaurant,
 			likedClass: review.likes.includes(userId) ? "liked" : "",

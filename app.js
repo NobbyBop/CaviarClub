@@ -43,6 +43,22 @@ app.use("/create", (req, res, next) => {
 	next();
 });
 
+app.use("view", (req, res, next) => {
+	if ((req.path == "/restaurant") && req.session.user.admin)
+		return res.redirect("/home");
+	if ((req.path == "/restaurantADMIN") && !req.session.user.admin)
+		return res.redirect("/home");
+	next();
+});
+
+app.use("view", (req, res, next) => {
+	if ((req.path == "/review") && req.session.user.admin)
+		return res.redirect("/home");
+	if ((req.path == "/reviewADMIN") && !req.session.user.admin)
+		return res.redirect("/home");
+	next();
+});
+
 const rewriteUnsupportedBrowserMethods = (req, res, next) => {
 	if (req.body && req.body._method) {
 		req.method = req.body._method;
