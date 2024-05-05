@@ -1,6 +1,8 @@
 import { userData } from "../../data/index.js";
 import * as h from "../../helpers.js";
 import { Router } from "express";
+import { getReviewsFromUser } from "../../data/review/getReviewsFromUser.js";
+
 const router = Router();
 
 router
@@ -24,12 +26,17 @@ router
 				return res
 					.status(500)
 					.render("error", { title: "Error", error: "Internal Server Error." });
+
+			let userReviews = await getReviewsFromUser(String(result._id))
+			
 			req.session.user = {
 				email: result.email,
 				username: result.username,
 				userId: result._id,
 				admin: result.admin,
+				reviewCount: userReviews.length
 			};
+
 			return res.redirect("/home");
 		} catch (e) {
 			return res

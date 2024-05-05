@@ -47,6 +47,12 @@
 		{{/if}}
 	</div>
 	<hr />
+
+	<h2>Comments</h2>
+	{{#if cantComment}}
+		<p class="error">You have already commented on this post!</p>
+	{{/if}}
+
 	<ul id="comments">
 		{{#each review.comments}}
 			<li class="comment-item">

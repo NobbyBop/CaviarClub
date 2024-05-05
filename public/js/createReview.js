@@ -20,91 +20,81 @@ function checkRating(rating) {
   }
 }
 
-function checkImage(str) {
-  // Pictures are allowed to not exist, or not be provided into the function.
-  if (str === undefined) return undefined;
-  if (typeof str !== "string") throw new Error("Image must be represented as a string.");
-  str = str.trim();
-  // If the picture doesn't exist, that is fine.
-  if (str.length === 0) return undefined;
-  try {
-      const binaryData = atob(str);
-      if (!binaryData.startsWith('\x89PNG\r\n\x1a\n')) throw new Error("Image must be a PNG!");
-      return str;
-  } catch (e) {
-      throw new Error("Image must be a PNG!");
-  }
+//https://developer.mozilla.org/en-US/docs/Web/API/FileReader
+//https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
+//https://developer.mozilla.org/en-US/docs/Web/API/FileReader/load_event
+function checkImage(file) {
+    return new Promise((resolve, reject) => {
+        if (!file) {
+            resolve(undefined); // Return undefined if no file is provided
+            return;
+        }
+        if (!file.type.startsWith('image/png')) {
+            reject(new Error("Image must be a PNG!"));
+            return;
+        }
+        if (file.size > 10000000) {
+            reject(new Error("Max image size is 10 MB."));
+            return;
+        }
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            const base64Image = reader.result.split(',')[1]; // Extract base64 string
+            resolve(base64Image);
+        };
+        reader.onerror = error => reject(error);
+    });
 }
 
 
 
-$('#create-review-form').submit(function(event) {
-  event.preventDefault(); // Prevent the form from submitting initially
 
-  $('#errors').empty();
-  let err_count = 0;
+$('#create-review-form').submit(async function(event) {
+    event.preventDefault(); // Prevent the form from submitting initially
 
-  let t = $('#title').val().trim();
-  let r = $('#rating').val().trim();
-  let c = $('#content').val().trim();
-  let i = $('#image')[0].files[0];
+    $('#errors').empty();
+    let err_count = 0;
 
-  try {
-      t = checkString(t);
-  } catch (e) {
-      err_count++;
-      $('#errors').append(`<p>Title: ${e.message}</p>`);
-  }
+    let t = $('#title').val().trim();
+    let r = $('#rating').val().trim();
+    let c = $('#content').val().trim();
+    let i = $('#image')[0].files[0];
 
-  try {
-      r = checkRating(parseFloat(r)); // Parse the rating to float
-  } catch (e) {
-      err_count++;
-      $('#errors').append(`<p>Rating: ${e.message}</p>`);
-  }
+    try {
+        t = checkString(t);
+    } catch (e) {
+        err_count++;
+        $('#errors').append(`<p>Title: ${e.message}</p>`);
+    }
 
-  try {
-      c = checkString(c);
-  } catch (e) {
-      err_count++;
-      $('#errors').append(`<p>Review: ${e.message}</p>`);
-  }
+    try {
+        r = checkRating(parseFloat(r)); // Parse the rating to float
+    } catch (e) {
+        err_count++;
+        $('#errors').append(`<p>Rating: ${e.message}</p>`);
+    }
 
-  // Check if an image file is selected
-  if (i) {
-      // Read the selected image file and convert it to base64
-      if (i.size > 1000000) {
-          err_count++;
-          $('#errors').append(`<p>Picture: Max image size is 10 MB.</p>`);
-      } else {
-          const reader = new FileReader();
-          reader.onload = function(event) {
-              let base64Image = event.target.result.split(',')[1]; // Remove data URL prefix
-              try {
-                  base64Image = checkImage(base64Image);
-                  $('#imageBase64').val(base64Image);
-                  if (err_count > 0) {
-                    $('#title').focus();
-                  } else {
-                      $('#create-review-form')[0].submit();
-                  }
-              } catch (e) {
-                  err_count++;
-                  $('#errors').append(`<p>Review: ${e.message}</p>`);
-              }
-          };
-          reader.readAsDataURL(i); // Read the image file as data URL
-      }
-  } else {
-      if (err_count > 0) {
-          $('#title').focus();
-      } else {
-          $('#create-review-form')[0].submit();
-      }
-  }
-  // Prevent form submission if there are errors
-  if (err_count > 0) {
-      $('#title').focus();
-      return false;
-  }
+    try {
+        c = checkString(c);
+    } catch (e) {
+        err_count++;
+        $('#errors').append(`<p>Review: ${e.message}</p>`);
+    }
+
+    // Check if an image file is selected
+    if (i) {
+        try {
+            const base64Image = await checkImage(i);
+            $('#imageBase64').val(base64Image);
+        } catch (e) {
+            err_count++;
+            $('#errors').append(`<p>Picture: ${e.message}</p>`);
+        }
+    }
+
+    // Submit the form if there are no errors
+    if (err_count === 0) {
+        $('#create-review-form')[0].submit();
+    }
 });

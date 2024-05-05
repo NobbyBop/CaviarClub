@@ -46,7 +46,11 @@ app.use('/edit', (req, res, next) => {
 
 app.use("/create", (req, res, next) => {
 	if (!req.session || !req.session.user) return res.redirect("/home");
+	if(req.session && req.session.user.reviewLimit >= 50) return res.status(403).render("error", {message:"You have reached your review limit of 50.",
+																							username:req.session.user.username 	
+	})
 	next();
+	
 });
 
 const rewriteUnsupportedBrowserMethods = (req, res, next) => {
