@@ -13,7 +13,7 @@ router
 		if (req.session && req.session.user) {
 			username = req.session.user.username;
 			userId = req.session.user.userId;
-			isAdmin = req.session.user.admin
+			isAdmin = req.session.user.admin;
 		}
 		let reviewId;
 		try {
@@ -52,11 +52,13 @@ router
 			review.comments[i].userId = review.comments[i].userId.toString();
 		}
 
-		let urlLocation = isAdmin ? 'view/reviewADMIN' : 'view/review';
-		let title = isAdmin ? `ADMIN: ${review.dishname} | Review` : `${review.dishname} | Review`;	
-		
-		return res.render(urlLocation, {
+		let title = isAdmin
+			? `ADMIN: ${review.dishname} | Review`
+			: `${review.dishname} | Review`;
+
+		return res.render("view/review", {
 			title: title,
+			admin: isAdmin,
 			reviewId,
 			review,
 			restaurant,

@@ -19,7 +19,6 @@ router.route("/:restaurantId").get(async (req, res) => {
 		return res.render("error", { message });
 	}
 
-
 	let restaurant;
 	try {
 		restaurant = await getRestaurantFromId(restaurantId);
@@ -34,16 +33,18 @@ router.route("/:restaurantId").get(async (req, res) => {
 		return res.render("error", { message });
 	}
 
-	let urlLocation = isAdmin ? 'view/restaurantADMIN' : 'view/restaurant';
-	let title = isAdmin ? `ADMIN: ${restaurant.name} | Restaurant` : `${restaurant.name} | Restaurant`;
+	let title = isAdmin
+		? `ADMIN: ${restaurant.name} | Restaurant`
+		: `${restaurant.name} | Restaurant`;
 
-	return res.render(urlLocation, {
-		title: title,
+	return res.render("view/restaurant", {
+		title,
+		admin: isAdmin,
 		restaurantId,
 		restaurant,
 		dishes,
 		username,
-		userId
+		userId,
 	});
 });
 

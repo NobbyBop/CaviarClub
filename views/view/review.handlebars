@@ -1,6 +1,18 @@
 <link rel="stylesheet" href="/public/css/view/review.css" />
 <div id="container">
 	<img src="data:image/png;base64,{{review.picture}}" alt="{{review.title}}" />
+	{{#if admin}}
+		<form action="/edit/review" method="post">
+			<input
+				type="hidden"
+				id="reviewId"
+				name="reviewId"
+				value="{{reviewId}}"
+			/><br />
+			<input type="hidden" id="isDeleted" name="isDeleted" value="yes" /><br />
+			<button type="submit" class="badButton">Delete Review (No Undo)!!!</button>
+		</form><br /><br />
+	{{/if}}
 	<div id="header-container">
 		<h1 id="rating">{{review.rating}} <span>out of</span> 5</h1>
 		<h1 id="dish-name">{{review.dishname}}</h1>
