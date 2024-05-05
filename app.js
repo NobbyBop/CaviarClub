@@ -38,6 +38,12 @@ app.use("/auth", (req, res, next) => {
 	next();
 });
 
+app.use('/edit', (req, res, next) => {
+	if ((req.path == "/restaurant" || req.path == "/review") && (!req.session.user || !req.session.user.admin))
+		return res.redirect("/home");
+	next();
+});
+
 app.use("/create", (req, res, next) => {
 	if (!req.session || !req.session.user) return res.redirect("/home");
 	next();
