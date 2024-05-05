@@ -6,54 +6,46 @@
 		<h1 id="dish-name">{{review.dishname}}</h1>
 	</div>
 	<div id="info-container">
-
 		<ul id="tags">
 			{{#each review.tags}}
 				<li class="tag">{{this}}</li>
 			{{/each}}
 		</ul>
-		<a
-			id="restaurant-link"
-			href="/view/restaurant/{{restaurant._id}}"
-		>{{restaurant.name}}</a>
-
+		<a id="restaurant-link" href="/view/restaurant/{{restaurant._id}}">{{restaurant.name}}</a>
 	</div>
 	<hr />
 	<div id="review-info-container">
 		<h2>{{review.title}}</h2>
 		<p>
-			Author:
-			<a
-				class="username"
-				id="user-link"
-				href="/view/user/{{review.userId}}"
-			>{{review.username}}</a>
+			Author: <a class="username" id="user-link" href="/view/user/{{review.userId}}">{{review.username}}</a>
 		</p>
 		<p id="date">Date: {{review.date}}</p>
 	</div>
-	<p id="content">
-		{{review.content}}
-	</p>
+	<p id="content">{{review.content}}</p>
 	<div id="likes">
 		<h3 id="numLikes">Number of likes: {{review.likes.length}}</h3>
-
 		{{#if userId}}
 			<button class="{{likedClass}}" id="likeButton">Like</button>
 		{{/if}}
 	</div>
+	<hr />
 	<ul id="comments">
 		{{#each review.comments}}
 			<li class="comment-item">
-				<a
-					class="username"
-					id="comment-user"
-					href="/view/user/{{this.userId}}"
-				>{{this.username}}</a>
+				<a class="username" id="comment-user" href="/view/user/{{this.userId}}">{{this.username}}</a>
 				<p>{{this.comment}}</p>
 			</li>
 		{{/each}}
 	</ul>
+
+	{{#if userId}}
+		<form action="/view/review/{{review._id}}" method="post">
+			<textarea name="comment" required placeholder="Write your comment here..."></textarea>
+			<button type="submit">Submit Comment</button>
+		</form>
+	{{/if}}
 </div>
+
 <script
 	src="https://code.jquery.com/jquery-3.7.1.js"
 	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
