@@ -39,18 +39,21 @@
 			{{#each dishReviews}}
 				<li id="item" class="item">
 					<a id="picTitle" href="/view/review/{{this._id}}">
-						<img src="data:image/png;base64,{{this.picture}}" class="pic" /><br
+						<img alt="{{this.title}} image" src="data:image/png;base64,{{this.picture}}" class="pic" /><br
 						/>
 						<h4 class="reviewTitle">{{this.title}}</h4>
 
 						<p class="DateRate">Date: {{this.date}}</p>
 						<p class="DateRate">Rating: {{this.rating}} out of 5</p>
-						<ul class="tags" id="Tag">
+						<br>
+						<div class="tag-div">
 							<h4 id="Tags">Tags:</h4>
-							{{#each this.tags}}
-								<li class="tag" id="Tags">{{this}}</li>
-							{{/each}}
-						</ul>
+							<ul class="tags" id="Tag">
+								{{#each this.tags}}
+									<li class="tag">{{this}}</li>
+								{{/each}}
+							</ul>
+						</div>
 						<p>{{this.content}}</p>
 					</a>
 				</li>
