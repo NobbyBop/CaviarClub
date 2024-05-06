@@ -25,7 +25,7 @@ export const restaurantData = {
 	getRestaurantFromDishId,
 	getRestaurantFromId,
 	removeRestaurant,
-	searchRestaurantsFromName
+	searchRestaurantsFromName,
 };
 
 import { createReview } from "./review/createReview.js";
@@ -44,19 +44,17 @@ export const reviewData = {
 	getReviewsFromRestaurant,
 	getReviewsSorted,
 	removeReview,
-	expandReviews
+	expandReviews,
 };
 
 import { createUser } from "./user/createUser.js";
 import { getUserFromId } from "./user/getUserFromId.js";
 import { getUserFromUsername } from "./user/getUserFromUsername.js";
-import { removeUser } from "./user/removeUser.js";
 import { loginUser } from "./user/loginUser.js";
 
 export const userData = {
 	createUser,
 	getUserFromId,
 	getUserFromUsername,
-	removeUser,
-	loginUser
+	loginUser,
 };

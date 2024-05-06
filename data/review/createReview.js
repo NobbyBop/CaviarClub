@@ -23,10 +23,7 @@ export const createReview = async (
 ) => {
 	dishId = checkId(dishId);
 	userId = checkId(userId);
-
-	// need picture validation
 	picture = checkImage(picture);
-
 	title = checkString(title);
 	checkRating(rating);
 	content = checkString(content);
@@ -80,16 +77,18 @@ export const createReview = async (
 	if (!insertedReview) throw new Error("Could not add review");
 
 	reviewsByDish = await getReviewsFromDishId(insertedReview.dishId.toString());
-    
+
 	let newAverage = 0;
-	if (reviewsByDish.length !== 0) 
-		newAverage = reviewsByDish.map(review => review.rating).reduce((sum, rating) => sum + rating, 0) / reviewsByDish.length;
+	if (reviewsByDish.length !== 0)
+		newAverage =
+			reviewsByDish
+				.map((review) => review.rating)
+				.reduce((sum, rating) => sum + rating, 0) / reviewsByDish.length;
 
 	await restaurantCollection.findOneAndUpdate(
 		{ "dishes._id": insertedReview.dishId },
 		{ $set: { "dishes.$.averageRating": newAverage } }
 	);
-
 
 	return insertedReview;
 };

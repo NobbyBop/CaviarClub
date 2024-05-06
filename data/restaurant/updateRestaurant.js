@@ -1,8 +1,10 @@
 import { ObjectId } from "mongodb";
 import { restaurants } from "../../config/mongoCollections.js";
-import { checkString } from "../../helpers.js";
+import { checkId, checkString } from "../../helpers.js";
 
 export const updateRestaurant = async (restaurantId, name, address) => {
+	restaurantId = checkId(restaurantId);
+
 	let restaurantCollection = await restaurants();
 
 	let updatedRestaurant = {};

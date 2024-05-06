@@ -4,6 +4,7 @@ import { ObjectId } from "mongodb";
 export async function searchDishesFromName(name, restaurantId) {
 	name = h.checkString(name);
 	restaurantId = h.checkId(restaurantId);
+
 	let col = await restaurants();
 	let restaurant = await col.findOne({ _id: new ObjectId(restaurantId) });
 	if (!restaurant) throw Error("Could not get restaurant with provided Id!");

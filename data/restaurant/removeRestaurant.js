@@ -1,8 +1,11 @@
 import { ObjectId } from "mongodb";
 import { restaurants } from "../../config/mongoCollections.js";
 import { reviews } from "../../config/mongoCollections.js";
+import { checkId } from "../../helpers.js";
 
 export const removeRestaurant = async (restaurantId) => {
+	restaurantId = checkId(restaurantId);
+
 	let restaurantCollection = await restaurants();
 	let reviewCollection = await reviews();
 
