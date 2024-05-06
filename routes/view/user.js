@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { getUserFromId } from "../../data/user/getUserFromId.js";
 import { getReviewsFromUser } from "../../data/review/getReviewsFromUser.js";
+import { checkString } from "../../helpers.js";
 
 const router = Router();
 
@@ -11,7 +12,7 @@ router.get("/:userId", async (req, res) => {
 		userId = req.session.user.userId;
 	}
 	try {
-		const viewUserId = req.params.userId;
+		const viewUserId = checkString(req.params.userId);
 		const user = await getUserFromId(viewUserId);
 		const reviews = await getReviewsFromUser(viewUserId);
 		return res.render("view/user", { user, reviews, username, userId });

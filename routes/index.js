@@ -27,7 +27,6 @@ export default (app) => {
 	app.use("/create/dish", createDishRoutes);
 	app.use("/create/restaurant", createRestaurantRoutes);
 	app.use("/create/review", createReviewRoutes);
-	app.use("/create/user", createUserRoutes);
 	app.use("/edit/restaurant", editRestaurantRoutes);
 	app.use("/edit/review", editReviewRoutes);
 	app.use("/edit/dish", editDishRoutes);

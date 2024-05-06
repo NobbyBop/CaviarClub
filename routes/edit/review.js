@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { removeReview } from "../../data/review/removeReview.js";
+import { checkId } from "../../helpers.js";
 const router = Router();
 
 router.route("/").post(async (req, res) => {
@@ -10,7 +11,7 @@ router.route("/").post(async (req, res) => {
 		isAdmin = req.session.user.admin;
 	}
 
-	let reviewId = req.body.reviewId;
+	let reviewId = checkId(req.body.reviewId);
 	let review;
 
 	try {
