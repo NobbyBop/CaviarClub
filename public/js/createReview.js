@@ -23,6 +23,7 @@ function checkString(string) {
   //https://developer.mozilla.org/en-US/docs/Web/API/FileReader
   //https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
   //https://developer.mozilla.org/en-US/docs/Web/API/FileReader/load_event
+  //https://stackoverflow.com/questions/36280818/how-to-convert-file-to-base64-in-javascript
   function checkImage(file) {
       return new Promise((resolve, reject) => {
           if (!file) {
