@@ -5,7 +5,6 @@ import logoutRoutes from "./auth/logout.js";
 import createDishRoutes from "./create/dish.js";
 import createRestaurantRoutes from "./create/restaurant.js";
 import createReviewRoutes from "./create/review.js";
-import createUserRoutes from "./create/user.js";
 
 import viewRestaurantRoutes from "./view/restaurant.js";
 import viewReviewRoutes from "./view/review.js";
