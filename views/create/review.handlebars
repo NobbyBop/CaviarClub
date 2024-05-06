@@ -21,19 +21,19 @@
             
 			name="rating"
 			id="rating"
-			value="{{prevSub.rating}}"
+			{{#if prevSub.rating}}value="{{prevSub.rating}}"{{/if}}
 		/>
         <input id="actualRating" readonly value="{{prevSub.rating}}"></input>
     <p id="tagP">Optional tags:</p>
-    <input type="text" name="tag1" id="tag1" class="tags" value="{{prevSub.tag1}}"/>
-    <input type="text" name="tag2" id="tag2" class="tags" value="{{prevSub.tag2}}"/>
-    <input type="text" name="tag3" id="tag3" class="tags" value="{{prevSub.tag3}}"/>
+    <input type="text" name="tag1" id="tag1" class="tags" {{#if prevSub.tag1}}value="{{prevSub.tag1}}"{{/if}}/>
+    <input type="text" name="tag2" id="tag2" class="tags" {{#if prevSub.tag2}}value="{{prevSub.tag2}}"{{/if}}/>
+    <input type="text" name="tag3" id="tag3" class="tags" {{#if prevSub.tag3}}value="{{prevSub.tag3}}"{{/if}}/>
     <br>
     <label for="content">Review:
         <textarea 
             class="scrollable-textarea" name="content"
 			id="content"
-            value="{{prevSub.content}}"></textarea>
+            {{#if prevSub.content}}value="{{prevSub.content}}"{{/if}}></textarea>
 	</label> <br>
     <label for="image">Select photo:
         <input
@@ -41,7 +41,7 @@
             id="image"
             name="image"
             accept="image/png"
-            value="{{prevSub.value}}"
+            {{#if prevSub.value}}value="{{prevSub.value}}"{{/if}}
         />
     </label> <br>
     <input type="hidden" name="imageBase64" id="imageBase64">
