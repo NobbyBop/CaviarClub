@@ -6,8 +6,8 @@ $(document).ready(() => {
 
 		const data = new FormData(e.target);
 
-		const dishName = data.get("dishName").trim();
-		const restaurantId = data.get("restaurantId");
+		const dishName = filterXSS(data.get("dishName").trim());
+		const restaurantId = filterXSS(data.get("restaurantId"));
 
 		if (dishName.length == 0) {
 			alert("cannot search for an empty string.");
@@ -28,13 +28,15 @@ $(document).ready(() => {
 				$("#searchResults").show();
 				if (res.search) {
 					for (const dish of res.searchResults) {
+						const dishId = filterXSS(dish._id);
+						const dishName = filterXSS(dish.name);
 						$("#selectDish").append(
-							`<option value="${dish._id}">${dish.name}</option>`
+							`<option value="${dishId}">${dishName}</option>`
 						);
 					}
 					$("#selectDish").append(`<option value="/">--add a dish--</option>`);
 				} else {
-					alert(res.message);
+					alert(filterXSS(res.message));
 					$("#searchResults").hide();
 				}
 			},
@@ -45,7 +47,7 @@ $(document).ready(() => {
 
 		const data = new FormData(e.target);
 
-		const dishId = data.get("dishId");
+		const dishId = filterXSS(data.get("dishId"));
 
 		if (dishId == "") {
 			alert("you must select a dish to progress to the next page...");

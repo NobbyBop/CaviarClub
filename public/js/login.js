@@ -18,8 +18,8 @@ const checkUser = (str) => {
 $('#signin-form').submit((event) => {
     $('#errors').empty()
     let err_count = 0
-    let u = $('#username').val().trim()
-    let p = $('#password').val().trim()
+    let u = filterXSS($('#username').val().trim())
+    let p = filterXSS($('#password').val().trim())
 
     try{
         u = checkUser(u)

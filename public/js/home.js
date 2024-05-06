@@ -2,7 +2,7 @@ $('#sortForm').submit(function(event) {
     $('#errors').empty();
     let hasError = false;
 
-    const selectedOption = $('#sort').val();
+    const selectedOption = filterXSS($('#sort').val());
 
     if (!["rating", "recent", "alphabetical"].includes(selectedOption)) {
         hasError = true;

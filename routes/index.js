@@ -5,7 +5,6 @@ import logoutRoutes from "./auth/logout.js";
 import createDishRoutes from "./create/dish.js";
 import createRestaurantRoutes from "./create/restaurant.js";
 import createReviewRoutes from "./create/review.js";
-import createUserRoutes from "./create/user.js";
 
 import viewRestaurantRoutes from "./view/restaurant.js";
 import viewReviewRoutes from "./view/review.js";
@@ -27,7 +26,6 @@ export default (app) => {
 	app.use("/create/dish", createDishRoutes);
 	app.use("/create/restaurant", createRestaurantRoutes);
 	app.use("/create/review", createReviewRoutes);
-	app.use("/create/user", createUserRoutes);
 	app.use("/edit/restaurant", editRestaurantRoutes);
 	app.use("/edit/review", editReviewRoutes);
 	app.use("/edit/dish", editDishRoutes);
