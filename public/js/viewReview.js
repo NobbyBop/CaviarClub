@@ -5,14 +5,14 @@ $(document).ready(() => {
 				method: "post",
 				dataType: "json",
 				data: {
-					like: "remove",
+					like: filterXSS("remove"),
 				},
 				success: (res) => {
 					if (res.success) {
 						$("#numLikes").text(`Number of likes: ${res.newLikes}`);
 						$("#likeButton").removeClass("liked");
 					} else {
-						alert(res.message);
+						alert(filterXSS(res.message));
 					}
 				},
 			});
@@ -21,14 +21,14 @@ $(document).ready(() => {
 				method: "post",
 				dataType: "json",
 				data: {
-					like: "add",
+					like: filterXSS("add"),
 				},
 				success: (res) => {
 					if (res.success) {
 						$("#numLikes").text(`Number of likes: ${res.newLikes}`);
 						$("#likeButton").addClass("liked");
 					} else {
-						alert(res.message);
+						alert(filterXSS(res.message));
 					}
 				},
 			});
@@ -37,7 +37,7 @@ $(document).ready(() => {
 	$("#commentForm").submit((e) => {
 		const data = new FormData(e.target);
 
-		if (data.get("comment").trim().length == 0) {
+		if (filterXSS(data.get("comment")).trim().length == 0) {
 			alert("Cannot submit empty comment!!");
 			e.preventDefault();
 		}
