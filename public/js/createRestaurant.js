@@ -5,7 +5,7 @@ $(document).ready(() => {
 
 		const data = new FormData(e.target);
 
-		const restaurantName = data.get("restaurantName").trim();
+		const restaurantName = filterXSS(data.get("restaurantName").trim());
 
 		if (restaurantName.length == 0) {
 			alert("cannot search for an empty string.");
@@ -24,8 +24,11 @@ $(document).ready(() => {
 			success: (res) => {
 				if (res.search) {
 					for (const restaurant of res.searchResults) {
+						const sanitizedId = filterXSS(restaurant._id);
+						const sanitizedName = filterXSS(restaurant.name);
+						const sanitizedAddress = filterXSS(restaurant.address);
 						$("#selectRestaurant").append(
-							`<option value="${restaurant._id}">${restaurant.name} - ${restaurant.address}</option>`
+							`<option value="${sanitizedId}">${sanitizedName} - ${sanitizedAddress}</option>`
 						);
 					}
 					$("#selectRestaurant").append(
@@ -33,7 +36,7 @@ $(document).ready(() => {
 					);
 					$("#searchResults").show();
 				} else {
-					alert(res.message);
+					alert(filterXSS(res.message));
 					$("#searchResults").hide();
 				}
 			},
@@ -44,7 +47,7 @@ $(document).ready(() => {
 
 		const data = new FormData(e.target);
 
-		const restaurantId = data.get("restaurantId");
+		const restaurantId = filterXSS(data.get("restaurantId"));
 
 		if (restaurantId == "") {
 			alert("you must select a restaurant to progress to the next page...");

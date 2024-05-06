@@ -2,6 +2,7 @@ import { Router } from "express";
 import { checkId, checkImage, checkRating, checkString } from "../../helpers.js";
 import { createReview } from "../../data/review/createReview.js";
 import { getReviewsFromUser } from "../../data/review/getReviewsFromUser.js";
+import xss from "xss"
 
 const router = Router();
 
@@ -44,7 +45,7 @@ router.route("/new").post(async (req, res) => {
   let tags = [];
   //type checking
   try {
-    checkRating(parseFloat(review.rating));
+    checkRating(parseFloat(xss(review.rating)));
     review.content = checkString(review.content);
     review.title = checkString(review.title);
     req.session.dishId = checkId(req.session.dishId);

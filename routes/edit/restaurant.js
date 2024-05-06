@@ -16,8 +16,21 @@ router.route("/").post(async (req, res) => {
 	let name, address, restaurantId, isDeleted, restaurant;
 	try {
 		restaurantId = checkId(req.body.restaurantId);
+	} catch (e) {
+		// it is fine if these fail
+	}
+	try {
 		name = checkString(req.body.name);
+	} catch (e) {
+		// it is fine if these fail
+	}
+	try {
 		address = checkString(req.body.address);
+	} catch (e) {
+		// it is fine if these fail
+	}
+
+	try {
 		isDeleted = checkString(req.body.isDeleted) === "yes" ? true : false;
 		if (isDeleted) restaurant = await removeRestaurant(restaurantId);
 		else restaurant = await updateRestaurant(restaurantId, name, address);

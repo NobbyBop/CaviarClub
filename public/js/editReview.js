@@ -2,8 +2,8 @@ $('#reviewFormDelete').submit((event) => {
     $('#errors').empty()
     let err_count = 0
     
-    let r = $('#reviewId').val().trim()
-    let i = $('#isDeleted').val().trim()
+    let r = filterXSS($('#reviewId').val().trim())
+    let i = filterXSS($('#isDeleted').val().trim())
 
     if (r === "") {
         err_count++

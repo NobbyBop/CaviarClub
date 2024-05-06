@@ -48,7 +48,9 @@ router.route("/").post(async (req, res) => {
 		return res.render("error", { message, username, userId, isAdmin });
 	}
 
-	return res.redirect("/view/dish/" + dishId);
+	if (deleteDish) {
+		return res.redirect("/home");
+	}
 });
 
 export default router;

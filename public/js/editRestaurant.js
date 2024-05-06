@@ -2,10 +2,10 @@ $('#form1').submit((event) => {
     $('#errors').empty()
     let err_count = 0
 
-    let n = $('#name').val().trim()
-    let a = $('#address').val().trim()
-    let r = $('#restaurantId').val().trim()
-    let i = $('#isDeleted').val().trim()
+    let n = filterXSS($('#name').val().trim())
+    let a = filterXSS($('#address').val().trim())
+    let r = filterXSS($('#restaurantId').val().trim())
+    let i = filterXSS($('#isDeleted').val().trim())
 
     if (n === "" && a === "") {
         err_count++
@@ -32,8 +32,8 @@ $('#form2').submit((event) => {
     $('#errors').empty()
     let err_count = 0
     
-    let r = $('#restaurantId').val().trim()
-    let i = $('#isDeleted').val().trim()
+    let r = filterXSS($('#restaurantId').val().trim())
+    let i = filterXSS($('#isDeleted').val().trim())
 
     if (r === "") {
         err_count++

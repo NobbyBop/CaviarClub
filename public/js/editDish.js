@@ -2,10 +2,10 @@ $("#form1").submit((event) => {
 	$("#errors").empty();
 	let err_count = 0;
 
-	let n = $("#name").val().trim();
-	let r = $("#restaurantId").val().trim();
-	let d = $("#dishId").val().trim();
-	let i = $("#deleteDish").val().trim();
+	let n = filterXSS($("#name").val().trim());
+	let r = filterXSS($("#restaurantId").val().trim());
+	let d = filterXSS($("#dishId").val().trim());
+	let i = filterXSS($("#deleteDish").val().trim());
 
 	if (n === "") {
 		err_count++;
@@ -42,9 +42,9 @@ $("#form2").submit((event) => {
 	$("#errors").empty();
 	let err_count = 0;
 
-	let r = $("#restaurantId").val().trim();
-	let d = $("#dishId").val().trim();
-	let i = $("#isDeleted").val().trim();
+	let r = filterXSS($("#restaurantId").val().trim());
+	let d = filterXSS($("#dishId").val().trim());
+	let i = filterXSS($("#isDeleted").val().trim());
 
 	if (r === "") {
 		err_count++;

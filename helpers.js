@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb";
+import xss from "xss"
 
 export function createDateString(date) {
   //takes a javascript date and converts it to mm/dd/yyyy DOES NOT TYPECHECK!!!!
@@ -8,7 +9,7 @@ export function createDateString(date) {
   let dateString = "";
   if (month > 9) dateString = `${month}/${day}/${year}`;
   else dateString = `0${month}/${day}/${year}`;
-  return dateString;
+  return xss(dateString);
 }
 
 export function checkString(string) {
@@ -18,7 +19,7 @@ export function checkString(string) {
   string = string.trim();
   if (string.length <= 0)
     throw new Error("Empty string passed into checkString");
-  return string;
+  return xss(string);
 }
 
 export function checkId(Id) {
@@ -27,7 +28,7 @@ export function checkId(Id) {
   Id.trim();
   if (Id.length <= 0) throw new Error("Empty string passed into checkId");
   if (!ObjectId.isValid(Id)) throw new Error("Invalid ID passed to checkId");
-  return Id;
+  return xss(Id);
 }
 
 export function checkRating(rating) {
@@ -40,6 +41,7 @@ export function checkRating(rating) {
     if (rating.toString().split(".")[1].length > 1)
       throw new Error("Rating must have no more than 1 decimal place.");
   }
+  // if(rating !== xss(rating)) throw new Error("XSS attack!")
 }
 
 export function checkTags(tags) {
@@ -48,7 +50,7 @@ export function checkTags(tags) {
   if (!Array.isArray(tags)) throw new Error("Must pass an array(!) of tags");
   try {
     if (!tags.length === 0) {
-      tags.map((tag) => checkString(tag));
+      tags.map((tag) => xss(checkString(tag)));
     }
   } catch {
     throw new Error("Tags does not consist of an array of strings");
@@ -65,7 +67,7 @@ export function checkEmail(email) {
   if (email.length === 0) throw new Error("Empty email!");
   if (!/^[\w\.-]+@[\w\.-]+\.(com|edu|gov|net|org)$/.test(email))
     throw new Error("Invalid email!");
-  return email;
+  return xss(email);
 }
 //check domain is only used inside of check email
 function checkDomain(domain) {
@@ -80,7 +82,7 @@ export const vInt = (num) => {
     throw new Error("Not a number!");
   }
   if (!Number.isInteger(num)) throw new Error("Not an integer!");
-  return num;
+  return xss(num);
 };
 
 export const checkUser = (str) => {
@@ -90,7 +92,7 @@ export const checkUser = (str) => {
   if (str.length === 0) throw "Username not provided!";
   if (str.length < 5 || str.length > 10)
     throw "Username must be between 5 and 10 characters!";
-  return str.toLowerCase();
+  return xss(str.toLowerCase());
 };
 
 export const checkPass = (str) => {
@@ -104,7 +106,7 @@ export const checkPass = (str) => {
     )
   )
     throw "Password does not meet requirements!";
-  return str;
+  return xss(str);
 };
 
 export const checkImage = (str) => {
@@ -117,7 +119,7 @@ export const checkImage = (str) => {
   try {
       const binaryData = atob(str);
       if (!binaryData.startsWith('\x89PNG\r\n\x1a\n')) throw new Error("Image must be a PNG!");
-      return str;
+      return xss(str);
   } catch (e) {
       throw new Error("Image must be a PNG!");
   }

@@ -35,10 +35,10 @@ const checkUser = (str) => {
 $("#signup-form").submit((event) => {
 	$("#errors").empty();
 	let err_count = 0;
-	let u = $("#username").val().trim();
-	let p = $("#password").val().trim();
-	let cp = $("#confirmPassword").val().trim();
-	let e = $("#email").val().trim();
+	let u = filterXSS($("#username").val().trim());
+    let p = filterXSS($("#password").val().trim());
+    let cp = filterXSS($("#confirmPassword").val().trim());
+    let e = filterXSS($("#email").val().trim());
 
 	try {
 		u = checkUser(u);
