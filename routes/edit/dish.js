@@ -30,9 +30,9 @@ router.route("/").post(async (req, res) => {
 		//it is fine if these fail
 	}
 	try {
-		if (req.body.deleteDish) throw new Error("deleteDish not passed in");
+		if (!req.body.deleteDish) throw new Error("deleteDish not passed in");
 	} catch ({ message }) {
-		//it is fine if these fail
+		return res.render("error", { message, username, userId, isAdmin });
 	}
 	deleteDish = req.body.deleteDish == "yes";
 
@@ -50,7 +50,7 @@ router.route("/").post(async (req, res) => {
 
 	if (deleteDish) {
 		return res.redirect("/home");
-	}
+	} else return res.redirect("/view/dish/" + dishId);
 });
 
 export default router;
