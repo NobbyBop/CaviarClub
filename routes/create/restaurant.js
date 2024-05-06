@@ -26,7 +26,15 @@ router
 			});
 		}
 
-		let restaurantName = req.body.restaurantName;
+		let restaurantName;
+		try {
+			restaurantName = checkString(req.body.restaurantName);
+		} catch ({ message }) {
+			return res.json({
+				search: false,
+				message,
+			});
+		}
 
 		let searchResults;
 		try {

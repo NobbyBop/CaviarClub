@@ -1,11 +1,14 @@
 <link rel="stylesheet" href="/public/css/view/review.css" />
 <div id="container">
-	<img class="reviewPic" src="data:image/png;base64,{{review.picture}}" alt="{{review.title}}" />
+	<img
+		class="reviewPic"
+		src="data:image/png;base64,{{review.picture}}"
+		alt="{{review.title}}"
+	/>
 
 	<div id="errors">
 		<p class="error">{{error}}</p>
 	</div>
-
 
 	{{#if admin}}
 		<form action="/edit/review" id="reviewFormDelete" method="post">
@@ -29,13 +32,21 @@
 				<li class="tag">{{this}}</li>
 			{{/each}}
 		</ul>
-		<a id="restaurant-link" href="/view/restaurant/{{restaurant._id}}">{{restaurant.name}}</a>
+		<a
+			id="restaurant-link"
+			href="/view/restaurant/{{restaurant._id}}"
+		>{{restaurant.name}}</a>
 	</div>
 	<hr />
 	<div id="review-info-container">
 		<h2>{{review.title}}</h2>
 		<p>
-			Author: <a class="username" id="user-link" href="/view/user/{{review.userId}}">{{review.username}}</a>
+			Author:
+			<a
+				class="username"
+				id="user-link"
+				href="/view/user/{{review.userId}}"
+			>{{review.username}}</a>
 		</p>
 		<p id="date">Date: {{review.date}}</p>
 	</div>
@@ -56,15 +67,23 @@
 	<ul id="comments">
 		{{#each review.comments}}
 			<li class="comment-item">
-				<a class="username" id="comment-user" href="/view/user/{{this.userId}}">{{this.username}}</a>
+				<a
+					class="username"
+					id="comment-user"
+					href="/view/user/{{this.userId}}"
+				>{{this.username}}</a>
 				<p>{{this.comment}}</p>
 			</li>
 		{{/each}}
 	</ul>
 
 	{{#if userId}}
-		<form action="/view/review/{{review._id}}" method="post">
-			<textarea name="comment" required placeholder="Write your comment here..."></textarea>
+		<form id="commentForm" action="/view/review/{{review._id}}" method="post">
+			<textarea
+				name="comment"
+				required
+				placeholder="Write your comment here..."
+			></textarea>
 			<button type="submit">Submit Comment</button>
 		</form>
 	{{/if}}

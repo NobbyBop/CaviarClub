@@ -17,22 +17,22 @@ router.route("/").post(async (req, res) => {
 	try {
 		dishId = checkId(req.body.dishId);
 	} catch ({ message }) {
-		0;
+		//it is fine if these fail
 	}
 	try {
 		name = checkString(req.body.name);
 	} catch ({ message }) {
-		0;
+		//it is fine if these fail
 	}
 	try {
 		restaurantId = checkId(req.body.restaurantId);
 	} catch ({ message }) {
-		0;
+		//it is fine if these fail
 	}
 	try {
 		if (req.body.deleteDish) throw new Error("deleteDish not passed in");
 	} catch ({ message }) {
-		0;
+		//it is fine if these fail
 	}
 	deleteDish = req.body.deleteDish == "yes";
 
