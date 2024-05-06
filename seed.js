@@ -5,7 +5,7 @@ import { createReview } from "./data/review/createReview.js";
 import { createUser } from "./data/user/createUser.js";
 import { dbConnection, closeConnection } from "./config/mongoConnection.js";
 import { addLike } from "./data/review/addLike.js";
-import fs from 'fs'
+import fs from "fs";
 
 let connect = await dbConnection();
 await connect.dropDatabase();
@@ -13,23 +13,18 @@ await connect.dropDatabase();
 const users = [];
 
 // Create sample users
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 3; i++) {
 	users.push(
-		await createUser(
-			`user${i}@example.com`,
-			`user${i}`,
-			`P@ssword${i}`,
-			false
-		)
+		await createUser(`user${i}@example.com`, `user${i}`, `P@ssword${i}`, false)
 	);
 }
 
 // Create single admin user
 users.push(
 	await createUser(
-		'admin_e1@caviar.com',
-		'admin_u1',
-		'123@adminPassword@123',
+		"admin_e1@caviar.com",
+		"admin_u1",
+		"123@adminPassword@123",
 		true
 	)
 );
@@ -90,11 +85,11 @@ const reviewData = [
 // Create sample reviews
 function encodeImage(filePath) {
 	const imageData = fs.readFileSync(filePath);
-	return imageData.toString('base64');
-  }
-  
-for (let i = 0; i < 10; i++) {
-	let image = encodeImage(`images/${Math.floor(Math.random() * 6) + 1}.png`)
+	return imageData.toString("base64");
+}
+
+for (let i = 0; i < 20; i++) {
+	let image = encodeImage(`images/${Math.floor(Math.random() * 6) + 1}.png`);
 	// console.log(image.substring(0,100))
 	const { _id } = await createReview(
 		dishes[i % dishes.length]._id.toString(),
@@ -116,7 +111,7 @@ for (let i = 0; i < 10; i++) {
 		_id.toString()
 	);
 	for (let j = 0; j < i % users.length; j++) {
-		addLike(_id.toString(), users[j]._id.toString());
+		await addLike(_id.toString(), users[j]._id.toString());
 	}
 }
 
