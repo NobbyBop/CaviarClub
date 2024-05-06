@@ -52,7 +52,16 @@ router
 		}
 
 		let restaurantId = req.session.restaurantId;
-		let dishName = req.body.dishName;
+		let dishName;
+		try {
+			dishName = checkString(req.body.dishName);
+		} catch ({ message }) {
+			return res.status(500).render("error", {
+				message,
+				username,
+				userId,
+			});
+		}
 
 		let searchResults;
 		try {

@@ -82,7 +82,7 @@ router
                     return res.json({ success: false, message });
                 }
                 return res.json({ success: true, newLikes: newObj.likes.length });
-            } else {
+            } else if(req.body.like == "remove") {
                 let newObj;
                 try {
                     newObj = await removeLike(req.params.reviewId, userId);

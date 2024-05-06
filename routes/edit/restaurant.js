@@ -2,7 +2,7 @@ import { Router } from "express";
 import { searchRestaurantsFromName } from "../../data/restaurant/searchRestaurantsFromName.js";
 import { updateRestaurant } from "../../data/restaurant/updateRestaurant.js";
 import { removeRestaurant } from "../../data/restaurant/removeRestaurant.js";
-import { checkString } from "../../helpers.js";
+import { checkString, checkId } from "../../helpers.js";
 const router = Router();
 
 router.route("/").post(async (req, res) => {
@@ -15,10 +15,10 @@ router.route("/").post(async (req, res) => {
 
 	let name, address, restaurantId, isDeleted, restaurant;
 	try {
-		restaurantId = req.body.restaurantId;
-		name = req.body.name;
-		address = req.body.address;
-		isDeleted = req.body.isDeleted === "yes" ? true : false;
+		restaurantId = checkId(req.body.restaurantId);
+		name = checkString(req.body.name);
+		address = checkString(req.body.address);
+		isDeleted = checkString(req.body.isDeleted) === "yes" ? true : false;
 		if (isDeleted) restaurant = await removeRestaurant(restaurantId);
 		else restaurant = await updateRestaurant(restaurantId, name, address);
 	} catch ({ message }) {
