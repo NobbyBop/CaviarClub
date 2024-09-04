@@ -1,7 +1,5 @@
 # Caviar Club
 
-repo link: https://github.com/matthewmammano/CaviarClub.git
-
 how to get this project to work:
 - clone the repo
 - make sure you have node + mongodb installed on your computer
